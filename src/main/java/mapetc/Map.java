@@ -2,8 +2,7 @@ package mapetc;
 
 import entities.*;
 
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 public class Map {
     int grass = 10;
@@ -11,11 +10,10 @@ public class Map {
     int tree = 8;
     int herbivore = 5;
     int predator = 3;
-
     Random rand = new Random();
-    public int sizeMap = 10;
+    private int sizeMap = 10;
 
-   private HashMap<Coordinates, Entity> entitiesMap = new HashMap<>();
+   private final HashMap<Coordinates, Entity> entitiesMap = new HashMap<>();
 
     public void setEntity(Coordinates coordinates, Entity entity) {
         entity.setCoordinates(coordinates);
@@ -24,52 +22,67 @@ public class Map {
 
 
     public void setupEntitiesPositions() {
-        while (grass > 0 || rocks > 0 || tree > 0 || herbivore > 0 || predator > 0) {
-            for (int vertical = 0; vertical < sizeMap; vertical++) {
-                for (int horizontal = 0; horizontal < sizeMap; horizontal++) {
-                    switch (rand.nextInt(15)) {
-                        case 1 -> {
-                            if (grass > 0) {
-                                grass--;
-                                setEntity(new Coordinates(horizontal, vertical), new Grass(new Coordinates(horizontal, vertical), EntityEmoji.GRASS.getEmoji()));
-                            }
-                        }
-                        case 2 -> {
-                            if (rocks > 0) {
-                            rocks--;
-                            setEntity(new Coordinates(horizontal, vertical), new Rock(new Coordinates(horizontal, vertical), EntityEmoji.ROCK.getEmoji()));
-                            }
-                        }
-                        case 3 -> {
-                            if (tree > 0) {
-                                tree--;
-                                setEntity(new Coordinates(horizontal, vertical), new Tree(new Coordinates(horizontal, vertical), EntityEmoji.TREE.getEmoji()));
-                            }
-                        }
-                        case 4 -> {
-                            if (herbivore > 0) {
-                                herbivore--;
-                                setEntity(new Coordinates(horizontal, vertical), new Herbivore(new Coordinates(horizontal, vertical), EntityEmoji.HERBIVORE.getEmoji()));
-                            }
-                        }
-                        case 5 -> {
-                            if (predator > 0) {
-                                predator--;
-                                setEntity(new Coordinates(horizontal, vertical), new Predator(new Coordinates(horizontal, vertical), EntityEmoji.PREDATOR.getEmoji()));
-                            }
-                        }
-                    }
-                }
+        List<Coordinates> availablePositions = new ArrayList<>();
+
+        // Заполняем список всеми доступными координатами
+        for (int y = 0; y < sizeMap; y++) {
+            for (int x = 0; x < sizeMap; x++) {
+                availablePositions.add(new Coordinates(x, y));
             }
         }
-    }
 
-    private void initEntities() {
+        // Перемешиваем, чтобы распределение было случайным
+        Collections.shuffle(availablePositions);
 
+        // Итератор для извлечения координат
+        Iterator<Coordinates> iterator = availablePositions.iterator();
+
+        // Расставляем траву
+        while (grass > 0 && iterator.hasNext()) {
+            Coordinates pos = iterator.next();
+            setEntity(pos, new Grass(pos, EntityEmoji.GRASS.getEmoji()));
+            grass--;
+        }
+
+        // Расставляем камни
+        while (rocks > 0 && iterator.hasNext()) {
+            Coordinates pos = iterator.next();
+            setEntity(pos, new Rock(pos, EntityEmoji.ROCK.getEmoji()));
+            rocks--;
+        }
+
+        // Расставляем деревья
+        while (tree > 0 && iterator.hasNext()) {
+            Coordinates pos = iterator.next();
+            setEntity(pos, new Tree(pos, EntityEmoji.TREE.getEmoji()));
+            tree--;
+        }
+
+        // Расставляем травоядных
+        while (herbivore > 0 && iterator.hasNext()) {
+            Coordinates pos = iterator.next();
+            setEntity(pos, new Herbivore(pos, EntityEmoji.HERBIVORE.getEmoji()));
+            herbivore--;
+        }
+
+        // Расставляем хищников
+        while (predator > 0 && iterator.hasNext()) {
+            Coordinates pos = iterator.next();
+            setEntity(pos, new Predator(pos, EntityEmoji.PREDATOR.getEmoji()));
+            predator--;
+        }
     }
 
 
     public HashMap<Coordinates, Entity> getEntitiesMap() {
         return entitiesMap;
+    }
+
+    public int getSizeMap() {
+        return sizeMap;
+    }
+
+    public void setSizeMap(int sizeMap) {
+        this.sizeMap = sizeMap;
     }
 }

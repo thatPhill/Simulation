@@ -10,8 +10,8 @@ public class MapConsoleRender {
 
 
     public void render(Map map ) {
-        for (int vertical = 0; vertical < map.sizeMap; vertical++) {
-            for (int horizontal = 0; horizontal < map.sizeMap; horizontal++) {
+        for (int vertical = 0; vertical < map.getSizeMap(); vertical++) {
+            for (int horizontal = 0; horizontal < map.getSizeMap(); horizontal++) {
                 Entity entity = map.getEntitiesMap().get(new Coordinates(horizontal, vertical));
                 if (entity != null) {
                     System.out.print(entity.getEmoji());
