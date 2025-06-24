@@ -4,14 +4,13 @@ import entities.*;
 
 import java.util.*;
 
-public class Map {
+public class WorldMap {
     int grass = 10;
     int rocks = 10;
     int tree = 8;
     int herbivore = 5;
     int predator = 3;
-    Random rand = new Random();
-    private int sizeMap = 10;
+    private int size = 10;
 
    private final HashMap<Coordinates, Entity> entitiesMap = new HashMap<>();
 
@@ -25,8 +24,8 @@ public class Map {
         List<Coordinates> availablePositions = new ArrayList<>();
 
         // Заполняем список всеми доступными координатами
-        for (int y = 0; y < sizeMap; y++) {
-            for (int x = 0; x < sizeMap; x++) {
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
                 availablePositions.add(new Coordinates(x, y));
             }
         }
@@ -74,15 +73,16 @@ public class Map {
     }
 
 
+
     public HashMap<Coordinates, Entity> getEntitiesMap() {
         return entitiesMap;
     }
 
-    public int getSizeMap() {
-        return sizeMap;
+    public int getSize() {
+        return size;
     }
 
-    public void setSizeMap(int sizeMap) {
-        this.sizeMap = sizeMap;
+    public void setSize(int size) {
+        this.size = size;
     }
 }

@@ -3,16 +3,16 @@ package render;
 import entities.Entity;
 import entities.EntityEmoji;
 import mapetc.Coordinates;
-import mapetc.Map;
+import mapetc.WorldMap;
 
 public class MapConsoleRender {
    private final String EMPTY = EntityEmoji.EMPTY.getEmoji();
 
 
-    public void render(Map map ) {
-        for (int vertical = 0; vertical < map.getSizeMap(); vertical++) {
-            for (int horizontal = 0; horizontal < map.getSizeMap(); horizontal++) {
-                Entity entity = map.getEntitiesMap().get(new Coordinates(horizontal, vertical));
+    public void render(WorldMap worldMap) {
+        for (int vertical = 0; vertical < worldMap.getSize(); vertical++) {
+            for (int horizontal = 0; horizontal < worldMap.getSize(); horizontal++) {
+                Entity entity = worldMap.getEntitiesMap().get(new Coordinates(horizontal, vertical));
                 if (entity != null) {
                     System.out.print(entity.getEmoji());
                 }else {

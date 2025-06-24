@@ -1,12 +1,12 @@
-import mapetc.Map;
+import mapetc.WorldMap;
 import render.MapConsoleRender;
 
 public class Main {
     public static void main(String[] args) {
-        Map map = new Map();
-        map.setupEntitiesPositions();
+        WorldMap worldMap = new WorldMap();
+        worldMap.setupEntitiesPositions();
         MapConsoleRender mapConsoleRender = new MapConsoleRender();
-        mapConsoleRender.render(map);
+        mapConsoleRender.render(worldMap);
         int a = 123;
     }
 }
