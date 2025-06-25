@@ -10,9 +10,17 @@ public class WorldMap {
     int tree = 8;
     int herbivore = 5;
     int predator = 3;
-    private int size = 10;
+    private int size;
+    private static final int DEFAULT_SIZE = 10;
 
-   private final HashMap<Coordinates, Entity> entitiesMap = new HashMap<>();
+    public WorldMap(int size) {
+        this.size = size;
+    }
+    public WorldMap() {
+        this.size = DEFAULT_SIZE;
+    }
+
+    private final HashMap<Coordinates, Entity> entitiesMap = new HashMap<>();
 
     public void setEntity(Coordinates coordinates, Entity entity) {
         entity.setCoordinates(coordinates);
