@@ -7,12 +7,25 @@ import java.util.*;
 public class WorldMap {
     int grass = 10;
     int rocks = 10;
-    int tree = 8;
+    int tree = 10;
     int herbivore = 5;
     int predator = 3;
-    private int size = 10;
+    private int size;
+    private static final int DEFAULT_SIZE = 10;
 
-   private final HashMap<Coordinates, Entity> entitiesMap = new HashMap<>();
+    public WorldMap(int size) {
+        this.size = size;
+        grass = this.size;
+        rocks = this.size;
+        tree = this.size;
+        herbivore = this.size / 2;
+        predator = this.size / 3;
+    }
+    public WorldMap() {
+        this.size = DEFAULT_SIZE;
+    }
+
+    private final HashMap<Coordinates, Entity> entitiesMap = new HashMap<>();
 
     public void setEntity(Coordinates coordinates, Entity entity) {
         entity.setCoordinates(coordinates);

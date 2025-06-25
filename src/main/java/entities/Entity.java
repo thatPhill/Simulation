@@ -4,7 +4,7 @@ import mapetc.Coordinates;
 
 public abstract class Entity {
 private Coordinates coordinates;
-private String emoji;
+private final String emoji;
 
     public Entity(Coordinates coordinates, String emoji) {
         this.coordinates = coordinates;
