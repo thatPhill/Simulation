@@ -21,6 +21,8 @@ public class WorldMap {
         herbivore = this.size / 2;
         predator = this.size / 3;
     }
+
+
     public WorldMap() {
         this.size = DEFAULT_SIZE;
     }
