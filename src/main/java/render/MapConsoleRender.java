@@ -12,7 +12,7 @@ public class MapConsoleRender {
     public void render(WorldMap worldMap) {
         for (int vertical = 0; vertical < worldMap.getSize(); vertical++) {
             for (int horizontal = 0; horizontal < worldMap.getSize(); horizontal++) {
-                Entity entity = worldMap.getEntitiesMap().get(new Coordinates(horizontal, vertical));
+                Entity entity = worldMap.getEntity(new Coordinates(horizontal, vertical));
                 if (entity != null) {
                     System.out.print(entity.getEmoji());
                 }else {
