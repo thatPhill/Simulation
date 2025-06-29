@@ -13,6 +13,11 @@ public class Predator extends Creature{
         super(coordinates, emoji, DEFAULT_SPEED, DEFAULT_HEALTH);
     }
 
+    public int attack(){
+        return 5;
+    };
+
+
     @Override
     void makeMove() {
 

@@ -65,7 +65,12 @@ public class WorldMap {
         return neighbours;
     }
 
-
+    public void setupEntitiesPositionsTest(){
+        Coordinates start = new Coordinates(0, 0);
+        Coordinates goal = new Coordinates(2, 5);
+        setEntity(start, new Herbivore(start,EntityEmoji.HERBIVORE.getEmoji()));
+        setEntity(goal, new Grass(goal,EntityEmoji.GRASS.getEmoji()));
+    }
     public void setupEntitiesPositions() {
         List<Coordinates> availablePositions = new ArrayList<>();
 
