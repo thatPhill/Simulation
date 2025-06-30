@@ -7,6 +7,5 @@ public class Main {
         worldMap.setupEntitiesPositions();
         MapConsoleRender mapConsoleRender = new MapConsoleRender();
         mapConsoleRender.render(worldMap);
-        int a = 123;
     }
 }

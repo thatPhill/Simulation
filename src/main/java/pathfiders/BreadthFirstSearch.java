@@ -6,6 +6,11 @@ import mapetc.WorldMap;
 import java.util.*;
 
 public class BreadthFirstSearch implements PathFinder {
+
+    Queue<Coordinates> queue = new LinkedList<>();
+    Map<Coordinates, Coordinates> parentMap = new HashMap<>();
+    Set<Coordinates> visited = new HashSet<>();
+
     private final WorldMap worldMap;
 
     public BreadthFirstSearch(WorldMap worldMap) {
@@ -20,9 +25,6 @@ public class BreadthFirstSearch implements PathFinder {
             return path;
         }
 
-        Queue<Coordinates> queue = new LinkedList<>();
-        Map<Coordinates, Coordinates> parentMap = new HashMap<>();
-        Set<Coordinates> visited = new HashSet<>();
 
         queue.add(start);
         visited.add(start);
