@@ -1,6 +1,8 @@
 package entities;
 
+import pathfinders.BreadthFirstSearch;
 import world.Coordinates;
+import world.WorldMap;
 
 public class Herbivore extends Creature{
     private static final int DEFAULT_SPEED = 1;
@@ -15,7 +17,7 @@ public class Herbivore extends Creature{
     }
 
     @Override
-    void makeMove() {
+    public void makeMove(WorldMap worldMap, BreadthFirstSearch pathfinder) {
 
     }
 }

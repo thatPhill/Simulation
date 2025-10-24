@@ -1,11 +1,14 @@
+import pathfinders.BreadthFirstSearch;
 import render.ConsoleMap;
-import world.Map;
+import world.WorldMap;
 
 public class Main {
     public static void main(String[] args) {
-        Map map = new Map();
+
+        WorldMap worldMap = new WorldMap();
+        BreadthFirstSearch bfs = new BreadthFirstSearch(worldMap);
         ConsoleMap cm = new ConsoleMap();
-        map.setupEntitiesPositions();
-        cm.render(map);
+        worldMap.setupEntitiesPositions();
+        cm.render(worldMap);
     }
 }

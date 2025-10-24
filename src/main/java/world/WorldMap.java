@@ -4,7 +4,7 @@ import entities.*;
 
 import java.util.*;
 
-public class Map {
+public class WorldMap {
     private final int size;
     private static final int DEFAULT_SIZE = 10;
     private int grass = 10;
@@ -14,9 +14,9 @@ public class Map {
     private int predator = 3;
 
 
-    public Map(int size) {
+    public WorldMap(int size) {
         if (size < 10 || size > 50) {
-            throw new IllegalArgumentException("Size must be between 10 and 50");
+            throw new IllegalArgumentException("Map size must be between 10 and 50");
         }
         this.size = size;
         grass = this.size;
@@ -26,7 +26,7 @@ public class Map {
         predator = this.size / 3;
     }
 
-    public Map() {
+    public WorldMap() {
         this.size = DEFAULT_SIZE;
     }
 
@@ -36,6 +36,13 @@ public class Map {
     public void setEntity(Coordinates coordinates, Entity entity) {
         entity.setCoordinates(coordinates);
         entitiesMap.put(coordinates, entity);
+    }
+
+    public boolean isCellWalkable(int x, int y) {
+        Entity entity = getEntity(new Coordinates(x, y));
+        if (entity == null) return true;
+        if (entity instanceof Grass) return true;
+        return false;
     }
 
     public void removeEntity(Coordinates coordinates) {
@@ -89,6 +96,8 @@ public class Map {
         }
     }
 
+
+
     public int getSize() {
         return size;
     }
@@ -96,5 +105,32 @@ public class Map {
     public Entity getEntity(Coordinates coordinates) {
         return entitiesMap.get(coordinates);
     }
+
+
+    public List<Coordinates> getNeighbours(Coordinates coord) {
+        List<Coordinates> neighbours = new ArrayList<>();
+        int[][] directions = {
+                {0, 1},   // вверх
+                {1, 0},   // вправо
+                {0, -1},  // вниз
+                {-1, 0}   // влево
+        };
+
+
+
+        for (int[] direction : directions) {
+            int newHorizontal = coord.getHorizontal() + direction[0];
+            int newVertical = coord.getVertical() + direction[1];
+
+            if (newHorizontal >= 0 && newHorizontal < size && newVertical >= 0 && newVertical < size) {
+                if (isCellWalkable(newHorizontal, newVertical)) {
+                    neighbours.add(new Coordinates(newHorizontal, newVertical));
+                }
+            }
+        }
+
+        return neighbours;
+    }
+
 
 }

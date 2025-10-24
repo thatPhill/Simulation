@@ -1,6 +1,8 @@
 package entities;
 
+import pathfinders.BreadthFirstSearch;
 import world.Coordinates;
+import world.WorldMap;
 
 public class Predator extends Creature{
 
@@ -20,7 +22,7 @@ public class Predator extends Creature{
 
 
     @Override
-    void makeMove() {
+    public void makeMove(WorldMap worldMap, BreadthFirstSearch pathfinder) {
 
     }
 }
