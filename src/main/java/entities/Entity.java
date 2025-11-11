@@ -11,11 +11,11 @@ public abstract class Entity {
         this.coordinates = coordinates;
     }
 
-    public Coordinates getCoorditanes() {
+    public Coordinates getCoordinates() {
         return coordinates;
     }
 
-    public void setCoorditanes(Coordinates coordinates) {
+    public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
 
