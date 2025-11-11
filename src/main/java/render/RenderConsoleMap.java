@@ -1,4 +1,4 @@
-package entities.render;
+package render;
 
 public class RenderConsoleMap {
 }

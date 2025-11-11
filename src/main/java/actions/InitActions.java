@@ -1,4 +1,4 @@
-package entities.actions;
+package actions;
 
 public class InitActions extends Action {
 }
