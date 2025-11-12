@@ -20,9 +20,9 @@ public class WorldMap {
     private int predator = 3;
 
     public WorldMap(int size) {
-        if (size < 10 || size > 50) {
-            throw new IllegalArgumentException("Map size must be between 10 and 50");
-        }
+//        if (size < 10 || size > 50) {
+//            throw new IllegalArgumentException("Map size must be between 10 and 50");
+//        }
         this.size = size;
         grass = this.size;
         rocks = this.size;
