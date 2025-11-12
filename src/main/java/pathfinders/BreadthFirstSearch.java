@@ -9,7 +9,6 @@ public class BreadthFirstSearch implements PathFinder {
     Queue<Coordinates> queue = new LinkedList<>();
     Map<Coordinates, Coordinates> parentMap = new HashMap<>();
     Set<Coordinates> visited = new HashSet<>();
-    List<Coordinates> path = new ArrayList<>();
     private final WorldMap worldMap;
 
     public BreadthFirstSearch(WorldMap worldMap) {
