@@ -6,9 +6,7 @@ import world.WorldMap;
 import java.util.*;
 
 public class BreadthFirstSearch implements PathFinder {
-    Queue<Coordinates> queue = new LinkedList<>();
-    Map<Coordinates, Coordinates> parentMap = new HashMap<>();
-    Set<Coordinates> visited = new HashSet<>();
+
     private final WorldMap worldMap;
 
     public BreadthFirstSearch(WorldMap worldMap) {
@@ -16,14 +14,19 @@ public class BreadthFirstSearch implements PathFinder {
     }
 
     @Override
-    public List<Coordinates> findPath(Coordinates start, Coordinates end) {
+    public List<Coordinates> findPath(Coordinates start, Coordinates goal) {
+        Queue<Coordinates> queue = new LinkedList<>();
+        Map<Coordinates, Coordinates> parentMap = new HashMap<>();
+        Set<Coordinates> visited = new HashSet<>();
+
+
            queue.add(start);
            visited.add(start);
            parentMap.put(start, null);
 
            while (!queue.isEmpty()) {
                Coordinates current = queue.poll();
-               if (current.equals(end)) {
+               if (current.equals(goal)) {
                    List<Coordinates> path = new ArrayList<>();
                    while (current != null) {
                        path.add(current);
