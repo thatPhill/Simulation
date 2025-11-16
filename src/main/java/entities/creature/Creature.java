@@ -5,6 +5,8 @@ import pathfinders.BreadthFirstSearch;
 import world.Coordinates;
 import world.WorldMap;
 
+import java.util.List;
+
 public abstract class Creature extends Entity {
     private int speed;
     private int health;
@@ -18,6 +20,32 @@ public abstract class Creature extends Entity {
 
     public abstract Coordinates makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap);
 
+    public abstract boolean isTarget(Object entity);
+
+    public Coordinates findNearestTarget(WorldMap worldMap, BreadthFirstSearch pathfinder) {
+        Coordinates creatureCoordinates = getCoordinates();
+        int minimalSizePath = Integer.MAX_VALUE;
+        Coordinates nearestTargetCoordinates = null;
+        for (Coordinates mapCoordinates : worldMap.getEntitiesMap().keySet()) {
+            if (isTarget(worldMap.getEntitiesMap().get(mapCoordinates))) {
+                int currentSize = pathfinder.findPath(creatureCoordinates, mapCoordinates).size();
+                if (currentSize < minimalSizePath) {
+                    minimalSizePath = currentSize;
+                    nearestTargetCoordinates = mapCoordinates;
+                }
+            }
+        }
+        return nearestTargetCoordinates;
+    }
+
+     Coordinates getNextStep(List<Coordinates> path, Coordinates next) {
+        if (path.size() <= getSpeed()){
+            next = path.getLast();
+        } else if (getSpeed() < path.size()) {
+            next = path.get(getSpeed());
+        }
+        return next;
+    }
 
     public int getHealth() {
         return health;

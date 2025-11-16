@@ -10,10 +10,14 @@ import java.util.List;
 public class Herbivore extends Creature {
 
     private static final int DEFAULT_SPEED = 1;
-    private static final int DEFAULT_HEALTH = 5;
+    private static final int DEFAULT_HEALTH = 3;
 
     public Herbivore(Coordinates coordinates, String emoji, int speed, int health) {
         super(coordinates, emoji, speed, health);
+    }
+
+    public Herbivore(Coordinates coordinates, String emoji, int speed) {
+        super(coordinates, emoji, speed, DEFAULT_HEALTH);
     }
 
     public Herbivore(Coordinates coordinates, String emoji) {
@@ -23,39 +27,33 @@ public class Herbivore extends Creature {
     @Override
     public Coordinates makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap) {
         Coordinates start = getCoordinates();
-        Coordinates grass = findNearestGrass(worldMap, pathfinder);
+        Coordinates grass = findNearestTarget(worldMap, pathfinder);
         List<Coordinates> path = pathfinder.findPath(start, grass);
         if (path == null || path.isEmpty()) return start;
 
         Coordinates next = null;
+        this.setHealth(this.getHealth() - 1);
+        next = getNextStep(path, next);
 
-        if (path.size() <= getSpeed()){
-            next = path.getLast();
-        } else if (getSpeed() < path.size()) {
-            next = path.get(getSpeed());
-        }
+        if (next.equals(grass)) this.setHealth(this.getHealth() + 5);
+
 
         worldMap.removeEntity(start);
         setCoordinates(next);
         worldMap.setEntity(next, this);
+
+        if (this.getHealth() <= 0) worldMap.removeEntity(this.getCoordinates());
+
         return next;
     }
 
 
-    public Coordinates findNearestGrass(WorldMap worldMap, BreadthFirstSearch pathfinder) {
-        Coordinates herbivoreCoordinates = getCoordinates();
-        int minimalSizePath = Integer.MAX_VALUE;
-        Coordinates nearestGrassCoordinates = null;
-        for (Coordinates mapCoordinates : worldMap.getEntitiesMap().keySet()) {
-            if (worldMap.getEntitiesMap().get(mapCoordinates) instanceof Grass) {
-                int currentSize = pathfinder.findPath(herbivoreCoordinates, mapCoordinates).size();
-                if (currentSize < minimalSizePath) {
-                    minimalSizePath = currentSize;
-                    nearestGrassCoordinates = mapCoordinates;
-                }
-            }
-        }
-        return nearestGrassCoordinates;
+
+    //Helper method for findNearestTarget
+    @Override
+    public boolean isTarget(Object entity) {
+        return entity instanceof Grass;
     }
+
 
 }

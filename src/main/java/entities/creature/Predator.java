@@ -13,15 +13,22 @@ public class Predator extends Creature {
         super(coordinates, emoji, speed, health);
     }
 
+    public Predator(Coordinates coordinates, String emoji) {
+        super(coordinates, emoji, DEFAULT_SPEED, DEFAULT_HEALTH);
+    }
+
     @Override
-    public Coordinates makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap    ) {
+    public Coordinates makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap) {
 
         return null;
     }
 
-    public Predator(Coordinates coordinates, String emoji) {
-        super(coordinates, emoji, DEFAULT_SPEED, DEFAULT_HEALTH);
+    //Helper method for findNearestTarget
+    @Override
+    public boolean isTarget(Object entity) {
+        return entity instanceof Herbivore;
     }
+
 
     public int attack(){
         return 5;
