@@ -1,6 +1,8 @@
 package entities.creature;
 
+import pathfinders.BreadthFirstSearch;
 import world.Coordinates;
+import world.WorldMap;
 
 public class Predator extends Creature {
 
@@ -10,6 +12,13 @@ public class Predator extends Creature {
     public Predator(Coordinates coordinates, String emoji, int speed, int health) {
         super(coordinates, emoji, speed, health);
     }
+
+    @Override
+    public Coordinates makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap    ) {
+
+        return null;
+    }
+
     public Predator(Coordinates coordinates, String emoji) {
         super(coordinates, emoji, DEFAULT_SPEED, DEFAULT_HEALTH);
     }
@@ -17,9 +26,6 @@ public class Predator extends Creature {
     public int attack(){
         return 5;
     };
-    @Override
-    public void makeMove() {
 
-    }
 
 }

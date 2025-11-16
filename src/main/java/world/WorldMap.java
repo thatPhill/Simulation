@@ -135,5 +135,9 @@ public class WorldMap {
     public int getSize() {
         return size;
     }
+
+    public HashMap<Coordinates, Entity> getEntitiesMap() {
+        return entitiesMap;
+    }
 }
 

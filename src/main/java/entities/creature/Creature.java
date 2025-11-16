@@ -1,7 +1,9 @@
 package entities.creature;
 
 import entities.Entity;
+import pathfinders.BreadthFirstSearch;
 import world.Coordinates;
+import world.WorldMap;
 
 public abstract class Creature extends Entity {
     private int speed;
@@ -14,7 +16,7 @@ public abstract class Creature extends Entity {
         this.health = health;
     }
 
-    public abstract void makeMove();
+    public abstract Coordinates makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap);
 
 
     public int getHealth() {
