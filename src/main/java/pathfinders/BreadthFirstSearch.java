@@ -1,5 +1,7 @@
 package pathfinders;
 
+import entities.Entity;
+import entities.creature.Creature;
 import world.Coordinates;
 import world.WorldMap;
 
@@ -8,6 +10,8 @@ import java.util.*;
 public class BreadthFirstSearch implements PathFinder {
 
     private final WorldMap worldMap;
+    private Creature mover;
+
 
     public BreadthFirstSearch(WorldMap worldMap) {
         this.worldMap = worldMap;
@@ -36,8 +40,9 @@ public class BreadthFirstSearch implements PathFinder {
                    Collections.reverse(path);
                    return path;
                }
+               List<Coordinates> neighbours = worldMap.getNeighbours(current, mover);
 
-               for (Coordinates neighbour : worldMap.getNeighbours(current)) {
+               for (Coordinates neighbour : neighbours) {
                    if (!visited.contains(neighbour)) {
                        queue.add(neighbour);
                        parentMap.put(neighbour, current);
@@ -47,5 +52,8 @@ public class BreadthFirstSearch implements PathFinder {
            }
         return Collections.emptyList();
 
+    }
+    public void setMover(Creature mover) {
+        this.mover = mover;
     }
 }
