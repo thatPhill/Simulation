@@ -1,8 +1,12 @@
 package entities.creature;
 
+import entities.Entity;
+import entities.resource.Grass;
 import pathfinders.BreadthFirstSearch;
 import world.Coordinates;
 import world.WorldMap;
+
+import java.util.List;
 
 public class Predator extends Creature {
 
@@ -19,13 +23,29 @@ public class Predator extends Creature {
 
     @Override
     public Coordinates makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap) {
+        Coordinates start = getCoordinates();
+        Coordinates herbivore = findNearestTarget(worldMap, pathfinder);
+        List<Coordinates> path = pathfinder.findPath(start, herbivore);
+        if (path == null || path.isEmpty()) return start;
 
-        return null;
+        Coordinates next = null;
+
+        next = getNextStep(path, next, worldMap.getEntity(herbivore));
+
+        if (next.equals(herbivore)) worldMap.getCreature(herbivore).setHealth(getHealth() - attack());
+
+
+        worldMap.removeEntity(start);
+        setCoordinates(next);
+        worldMap.setEntity(next, this);
+
+
+        return next;
     }
 
     //Helper method for findNearestTarget
     @Override
-    public boolean isTarget(Object entity) {
+    public boolean isTarget(Entity entity) {
         return entity instanceof Herbivore;
     }
 

@@ -2,6 +2,7 @@ package world;
 
 import entities.Entity;
 import entities.EntityEmoji;
+import entities.creature.Creature;
 import entities.creature.Herbivore;
 import entities.creature.Predator;
 import entities.resource.Grass;
@@ -88,13 +89,17 @@ public class WorldMap {
             setEntity(pos, new Predator(pos, EntityEmoji.PREDATOR.getEmoji()));
             predator--;
         }
+
+
     }
 
 
-    public boolean isCellWalkable(int x, int y) {
+
+    public boolean isCellWalkable(int x, int y, Creature mover) {
         Entity entity = getEntity(new Coordinates(x, y));
         if (entity == null) return true;
-        if (entity instanceof Grass) return true;
+        if (entity instanceof Grass && mover instanceof Herbivore) return true;
+        if (entity instanceof Herbivore && mover instanceof Predator) return true;
         return false;
     }
 
@@ -102,8 +107,11 @@ public class WorldMap {
         return entitiesMap.get(coordinates);
     }
 
+    public Creature getCreature(Coordinates coordinates) {
+        return (Creature) entitiesMap.get(coordinates);
+    }
 
-    public List<Coordinates> getNeighbours(Coordinates coord) {
+    public List<Coordinates> getNeighbours(Coordinates coord, Creature mover) {
         List<Coordinates> neighbours = new ArrayList<>();
         int[][] directions = {
                 {0, 1},   // right
@@ -116,19 +124,16 @@ public class WorldMap {
                 {1,-1} //down-left
         };
 
-
-
         for (int[] direction : directions) {
             int newX = coord.getX() + direction[0];
             int newY = coord.getY() + direction[1];
 
             if (newX >= 0 && newX < size && newY >= 0 && newY < size) {
-                if (isCellWalkable(newX, newY)) {
+                if (isCellWalkable(newX, newY, mover)) {
                     neighbours.add(new Coordinates(newX, newY));
                 }
             }
         }
-
         return neighbours;
     }
 

@@ -1,6 +1,7 @@
 package entities.creature;
 
 import entities.Entity;
+import entities.resource.Grass;
 import pathfinders.BreadthFirstSearch;
 import world.Coordinates;
 import world.WorldMap;
@@ -20,7 +21,7 @@ public abstract class Creature extends Entity {
 
     public abstract Coordinates makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap);
 
-    public abstract boolean isTarget(Object entity);
+    public abstract boolean isTarget(Entity entity);
 
     public Coordinates findNearestTarget(WorldMap worldMap, BreadthFirstSearch pathfinder) {
         Coordinates creatureCoordinates = getCoordinates();
@@ -28,6 +29,7 @@ public abstract class Creature extends Entity {
         Coordinates nearestTargetCoordinates = null;
         for (Coordinates mapCoordinates : worldMap.getEntitiesMap().keySet()) {
             if (isTarget(worldMap.getEntitiesMap().get(mapCoordinates))) {
+                pathfinder.setMover(this);
                 int currentSize = pathfinder.findPath(creatureCoordinates, mapCoordinates).size();
                 if (currentSize < minimalSizePath) {
                     minimalSizePath = currentSize;
@@ -38,10 +40,13 @@ public abstract class Creature extends Entity {
         return nearestTargetCoordinates;
     }
 
-     Coordinates getNextStep(List<Coordinates> path, Coordinates next) {
-        if (path.size() <= getSpeed()){
+     Coordinates getNextStep(List<Coordinates> path, Coordinates next, Entity target) {
+        if (path.size() <= getSpeed() && target instanceof Grass) {
             next = path.getLast();
-        } else if (getSpeed() < path.size()) {
+        } else if (path.size() <= getSpeed() && target instanceof Herbivore) {
+            next = path.get(path.size() - 2);
+        }
+        else if (getSpeed() < path.size()) {
             next = path.get(getSpeed());
         }
         return next;

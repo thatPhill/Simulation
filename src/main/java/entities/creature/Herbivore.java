@@ -1,5 +1,6 @@
 package entities.creature;
 
+import entities.Entity;
 import entities.resource.Grass;
 import pathfinders.BreadthFirstSearch;
 import world.Coordinates;
@@ -33,25 +34,29 @@ public class Herbivore extends Creature {
 
         Coordinates next = null;
         this.setHealth(this.getHealth() - 1);
-        next = getNextStep(path, next);
+
+        next = getNextStep(path, next, worldMap.getEntity(grass));
 
         if (next.equals(grass)) this.setHealth(this.getHealth() + 5);
 
+        if (this.getHealth() <= 0){
+            worldMap.removeEntity(this.getCoordinates());
+        } else {
+            worldMap.removeEntity(start);
+            setCoordinates(next);
+            worldMap.setEntity(next, this);
+        }
 
-        worldMap.removeEntity(start);
-        setCoordinates(next);
-        worldMap.setEntity(next, this);
 
-        if (this.getHealth() <= 0) worldMap.removeEntity(this.getCoordinates());
+
 
         return next;
     }
 
 
-
     //Helper method for findNearestTarget
     @Override
-    public boolean isTarget(Object entity) {
+    public boolean isTarget(Entity entity) {
         return entity instanceof Grass;
     }
 
