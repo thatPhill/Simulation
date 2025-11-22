@@ -19,7 +19,7 @@ public abstract class Creature extends Entity {
         this.health = health;
     }
 
-    public abstract Coordinates makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap);
+    public abstract void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap);
 
     public abstract boolean isTarget(Entity entity);
 
@@ -40,7 +40,8 @@ public abstract class Creature extends Entity {
         return nearestTargetCoordinates;
     }
 
-     Coordinates getNextStep(List<Coordinates> path, Coordinates next, Entity target) {
+     Coordinates getNextStep(List<Coordinates> path, Entity target) {
+        Coordinates next =  null;
         if (path.size() <= getSpeed() && target instanceof Grass) {
             next = path.getLast();
         } else if (path.size() <= getSpeed() && target instanceof Herbivore) {
