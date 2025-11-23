@@ -14,9 +14,9 @@ public class RenderConsoleMap {
             for (int y = 0; y < worldMap.getSize(); y++) {
                 Entity entity = worldMap.getEntity(new Coordinates(x, y));
                 if  (entity == null) {
-                    System.out.print(EMPTY);
+                    System.out.print(EMPTY + " ");
                 } else {
-                    System.out.print(entity.getEmoji());
+                    System.out.print(entity.getEmoji() + " ");
                 }
             }
             System.out.println();
