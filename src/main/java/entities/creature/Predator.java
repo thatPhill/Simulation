@@ -41,9 +41,6 @@ public class Predator extends Creature {
             worldMap.setEntity(next, this);
         }
 
-        worldMap.removeEntity(start);
-        setCoordinates(next);
-        worldMap.setEntity(next, this);
 
 
     }
