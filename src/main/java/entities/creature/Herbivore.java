@@ -40,9 +40,9 @@ public class Herbivore extends Creature {
         if (next.equals(grass)) this.setHealth(this.getHealth() + 5);
 
         if (this.getHealth() <= 0){
-            worldMap.clearCell(this.getCoordinates());
+            worldMap.removeEntity(this.getCoordinates());
         } else {
-            worldMap.clearCell(start);
+            worldMap.removeEntity(start);
             setCoordinates(next);
             worldMap.setEntity(next, this);
         }

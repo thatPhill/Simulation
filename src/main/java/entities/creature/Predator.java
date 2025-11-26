@@ -10,7 +10,7 @@ import java.util.List;
 public class Predator extends Creature {
 
     private static final int DEFAULT_SPEED = 2;
-    private static final int DEFAULT_HEALTH = 10;
+    private static final int DEFAULT_HEALTH = 100;
 
     public Predator(Coordinates coordinates, String emoji, int speed, int health) {
         super(coordinates, emoji, speed, health);
@@ -31,10 +31,17 @@ public class Predator extends Creature {
 
         next = getNextStep(path, worldMap.getEntity(herbivore));
 
-        if (next.equals(herbivore)) worldMap.getCreature(herbivore).setHealth(getHealth() - attack());
+        if (next.equals(herbivore)) worldMap.getCreature(herbivore).setHealth(worldMap.getCreature(herbivore).getHealth() - attack());
+        this.setHealth(this.getHealth() - getSpeed());
+        if (this.getHealth() <= 0){
+            worldMap.removeEntity(this.getCoordinates());
+        } else {
+            worldMap.removeEntity(start);
+            setCoordinates(next);
+            worldMap.setEntity(next, this);
+        }
 
-
-        worldMap.clearCell(start);
+        worldMap.removeEntity(start);
         setCoordinates(next);
         worldMap.setEntity(next, this);
 
@@ -49,7 +56,7 @@ public class Predator extends Creature {
 
 
     public int attack(){
-        return 5;
+        return 50;
     };
 
 

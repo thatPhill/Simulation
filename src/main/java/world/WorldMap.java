@@ -13,7 +13,7 @@ import java.util.*;
 
 public class WorldMap {
     private final int size;
-    private static final int DEFAULT_SIZE = 10;
+    private static final int DEFAULT_SIZE = 20;
     private int grass = 10;
     private int rocks = 10;
     private int tree = 10;
@@ -21,15 +21,15 @@ public class WorldMap {
     private int predator = 3;
 
     public WorldMap(int size) {
-//        if (size < 10 || size > 50) {
-//            throw new IllegalArgumentException("Map size must be between 10 and 50");
-//        }
+        if (size < 10 || size > 50) {
+            throw new IllegalArgumentException("Map size must be between 10 and 50");
+        }
         this.size = size;
-        grass = this.size;
-        rocks = this.size;
-        tree = this.size;
-        herbivore = this.size / 2;
-        predator = this.size / 3;
+        grass = this.size/2;
+        rocks = this.size/2;
+        tree = this.size/2;
+        herbivore = this.size / 3;
+        predator = this.size / 4;
     }
 
     public WorldMap() {
@@ -47,7 +47,7 @@ public class WorldMap {
         entitiesMap.remove(coordinates);
     }
 
-    public void setupEntitiesPositions(){
+    public void setupEntitiesPositions() {
         List<Coordinates> availablePositions = new ArrayList<>();
 
         for (int x = 0; x < size; x++) {
@@ -94,7 +94,6 @@ public class WorldMap {
     }
 
 
-
     public boolean isCellWalkable(int x, int y, Creature mover) {
         Entity entity = getEntity(new Coordinates(x, y));
         if (entity == null) return true;
@@ -118,10 +117,10 @@ public class WorldMap {
                 {1, 0},   // down
                 {0, -1},  // left
                 {-1, 0},  // up
-                {-1,-1},// up-left
-                {-1,1}, // up-right
-                {1,1}, // down-right
-                {1,-1} //down-left
+                {-1, -1},// up-left
+                {-1, 1}, // up-right
+                {1, 1}, // down-right
+                {1, -1} //down-left
         };
 
         for (int[] direction : directions) {
