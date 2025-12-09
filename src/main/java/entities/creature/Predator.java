@@ -11,7 +11,6 @@ public class Predator extends Creature {
 
     private static final int DEFAULT_SPEED = 5;
     private static final int DEFAULT_HEALTH = 100;
-    private int damage = 50;
 
     public Predator(Coordinates coordinates, String emoji, int speed, int health) {
         super(coordinates, emoji, speed, health);
@@ -52,12 +51,16 @@ public class Predator extends Creature {
     }
 
     private void attack(WorldMap worldMap, Coordinates next, Coordinates herbivore) {
-        if (next.equals(herbivore)){
-            Herbivore target = (Herbivore) worldMap.getCreature(herbivore);
-            target.setHealth(target.getHealth() - damage);
+        List<Coordinates> neighbours = worldMap.getNeighbours(this.getCoordinates(), this);
+        for (Coordinates neighbour : neighbours) {
+            Creature target = worldMap.getCreature(neighbour);
+            if (target instanceof Herbivore) {
+                int damage = 50;
+                target.setHealth(target.getHealth() - damage);
 
-            if (target.getHealth() <= 0){
-                worldMap.removeEntity(herbivore);
+                if (target.getHealth() <= 0){
+                    worldMap.removeEntity(herbivore);
+                }
             }
         }
     }
