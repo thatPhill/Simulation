@@ -1,3 +1,4 @@
+import actions.Action;
 import entities.EntityEmoji;
 import entities.creature.Herbivore;
 import entities.creature.Predator;
@@ -13,7 +14,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-
+        Action action = new Action();
+        action.initActions();
 
 
     }

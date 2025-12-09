@@ -2,6 +2,7 @@ package render;
 
 import entities.Entity;
 import entities.EntityEmoji;
+import entities.creature.Herbivore;
 import world.Coordinates;
 import world.WorldMap;
 
@@ -16,7 +17,12 @@ public class RenderConsoleMap {
                 if  (entity == null) {
                     System.out.print(EMPTY + " ");
                 } else {
-                    System.out.print(entity.getEmoji() + " ");
+                    if (entity instanceof Herbivore){
+                        System.out.print(((Herbivore) entity).getHealth());
+                    } else {
+                        System.out.print(entity.getEmoji() + " ");
+                    }
+
                 }
             }
             System.out.println();
