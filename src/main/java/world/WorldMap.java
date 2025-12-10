@@ -13,28 +13,11 @@ import entities.stative.Tree;
 import java.util.*;
 
 public class WorldMap {
-    private final int size;
-    private static final int DEFAULT_SIZE = 20;
-    private int grass = 10;
-    private int rocks = 10;
-    private int tree = 10;
-    private int herbivore = 5;
-    private int predator = 3;
+    private final WorldConfig config;
 
-    public WorldMap(int size) {
-        if (size < 10 || size > 50) {
-            throw new IllegalArgumentException("Map size must be between 10 and 50");
-        }
-        this.size = size;
-        grass = this.size/2;
-        rocks = this.size/2;
-        tree = this.size/2;
-        herbivore = this.size / 3;
-        predator = this.size / 4;
-    }
 
     public WorldMap() {
-        this.size = DEFAULT_SIZE;
+        this.config = new WorldConfig();
     }
 
     private final HashMap<Coordinates, Entity> entitiesMap = new HashMap<>();
@@ -51,8 +34,8 @@ public class WorldMap {
     public void setupEntitiesPositions() {
         List<Coordinates> availablePositions = new ArrayList<>();
 
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
+        for (int x = 0; x < config.getSize(); x++) {
+            for (int y = 0; y < config.getSize(); y++) {
                 availablePositions.add(new Coordinates(x, y));
             }
         }
@@ -61,34 +44,34 @@ public class WorldMap {
 
         Iterator<Coordinates> iterator = availablePositions.iterator();
 
-        while (grass > 0 && iterator.hasNext()) {
+        while (config.getGrassCount() > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             setEntity(pos, EntityFactory.createEntity(EntityType.GRASS, pos));
-            grass--;
+            config.setGrassCount(config.getGrassCount() - 1);
         }
 
-        while (rocks > 0 && iterator.hasNext()) {
+        while (config.getRocksCount() > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             setEntity(pos, EntityFactory.createEntity(EntityType.ROCK, pos));
-            rocks--;
+            config.setRocksCount(config.getRocksCount() - 1);
         }
 
-        while (tree > 0 && iterator.hasNext()) {
+        while (config.getTreesCount() > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             setEntity(pos, EntityFactory.createEntity(EntityType.TREE, pos));
-            tree--;
+            config.setTreesCount(config.getTreesCount() - 1);
         }
 
-        while (herbivore > 0 && iterator.hasNext()) {
+        while (config.getHerbivoresCount() > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             setEntity(pos, EntityFactory.createEntity(EntityType.HERBIVORE, pos));
-            herbivore--;
+            config.setHerbivoresCount(config.getHerbivoresCount() - 1);
         }
 
-        while (predator > 0 && iterator.hasNext()) {
+        while (config.getPredatorsCount() > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             setEntity(pos, EntityFactory.createEntity(EntityType.PREDATOR, pos));
-            predator--;
+            config.setPredatorsCount(config.getPredatorsCount() - 1);
         }
 
 
@@ -128,7 +111,7 @@ public class WorldMap {
             int newX = coord.getX() + direction[0];
             int newY = coord.getY() + direction[1];
 
-            if (newX >= 0 && newX < size && newY >= 0 && newY < size) {
+            if (newX >= 0 && newX < getSize() && newY >= 0 && newY < getSize()) {
                 if (isCellWalkable(newX, newY, mover)) {
                     neighbours.add(new Coordinates(newX, newY));
                 }
@@ -138,9 +121,12 @@ public class WorldMap {
     }
 
     public int getSize() {
-        return size;
+        return config.getSize();
     }
 
+    public void setSize(int size) {
+        config.setSize(size);
+    }
     public HashMap<Coordinates, Entity> getEntitiesMap() {
         return entitiesMap;
     }

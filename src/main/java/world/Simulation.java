@@ -16,6 +16,7 @@ public class Simulation {
 
     public Simulation() {
         this.map = new WorldMap();
+
         this.bfs = new BreadthFirstSearch(map);
 
         this.turnAction = new TurnActions(map,bfs);
