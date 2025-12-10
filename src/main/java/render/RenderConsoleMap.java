@@ -1,13 +1,13 @@
 package render;
 
 import entities.Entity;
-import entities.EntityEmoji;
+import entities.EntityType;
 import entities.creature.Herbivore;
 import world.Coordinates;
 import world.WorldMap;
 
 public class RenderConsoleMap {
-    private final String EMPTY = EntityEmoji.EMPTY.getEmoji();
+    private final String EMPTY = EntityType.EMPTY.getEmoji();
 
 
     public void render (WorldMap worldMap){

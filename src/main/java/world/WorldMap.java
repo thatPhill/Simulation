@@ -1,7 +1,8 @@
 package world;
 
 import entities.Entity;
-import entities.EntityEmoji;
+import entities.EntityFactory;
+import entities.EntityType;
 import entities.creature.Creature;
 import entities.creature.Herbivore;
 import entities.creature.Predator;
@@ -62,31 +63,31 @@ public class WorldMap {
 
         while (grass > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
-            setEntity(pos, new Grass(pos, EntityEmoji.GRASS.getEmoji()));
+            setEntity(pos, EntityFactory.createEntity(EntityType.GRASS, pos));
             grass--;
         }
 
         while (rocks > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
-            setEntity(pos, new Rock(pos, EntityEmoji.ROCK.getEmoji()));
+            setEntity(pos, EntityFactory.createEntity(EntityType.ROCK, pos));
             rocks--;
         }
 
         while (tree > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
-            setEntity(pos, new Tree(pos, EntityEmoji.TREE.getEmoji()));
+            setEntity(pos, EntityFactory.createEntity(EntityType.TREE, pos));
             tree--;
         }
 
         while (herbivore > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
-            setEntity(pos, new Herbivore(pos, EntityEmoji.HERBIVORE.getEmoji()));
+            setEntity(pos, EntityFactory.createEntity(EntityType.HERBIVORE, pos));
             herbivore--;
         }
 
         while (predator > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
-            setEntity(pos, new Predator(pos, EntityEmoji.PREDATOR.getEmoji()));
+            setEntity(pos, EntityFactory.createEntity(EntityType.PREDATOR, pos));
             predator--;
         }
 

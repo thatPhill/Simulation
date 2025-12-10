@@ -1,5 +1,4 @@
 import actions.Action;
-import entities.EntityEmoji;
 import entities.creature.Herbivore;
 import entities.creature.Predator;
 import entities.resource.Grass;

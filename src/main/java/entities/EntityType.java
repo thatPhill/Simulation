@@ -1,16 +1,16 @@
 package entities;
 
-public enum EntityEmoji {
-    ROCK("⛰️"),
-    GRASS("🌿"),
-    TREE("🌳"),
+public enum EntityType {
     HERBIVORE("🐇"),
     PREDATOR("🦊"),
+    GRASS("🌿"),
+    ROCK("⛰️"),
+    TREE("🌳"),
     EMPTY("⬛");
 
     private final String emoji;
 
-    EntityEmoji(String emoji) {
+    EntityType(String emoji) {
         this.emoji = emoji;
     }
 
@@ -18,3 +18,4 @@ public enum EntityEmoji {
         return emoji;
     }
 }
+
