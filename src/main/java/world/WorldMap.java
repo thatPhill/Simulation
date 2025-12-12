@@ -14,8 +14,8 @@ public class WorldMap {
     private final WorldConfig config;
 
 
-    public WorldMap() {
-        this.config = new WorldConfig();
+    public WorldMap(WorldConfig config) {
+        this.config = config;
     }
 
     private final HashMap<Coordinates, Entity> entitiesMap = new HashMap<>();

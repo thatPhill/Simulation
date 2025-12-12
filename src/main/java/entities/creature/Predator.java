@@ -3,6 +3,7 @@ package entities.creature;
 import entities.Entity;
 import pathfinders.BreadthFirstSearch;
 import world.Coordinates;
+import world.WorldConfig;
 import world.WorldMap;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class Predator extends Creature {
     }
 
     @Override
-    public void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap) {
+    public void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap, WorldConfig worldConfig) {
         Coordinates start = getCoordinates();
         Coordinates herbivore = findNearestTarget(worldMap, pathfinder);
         List<Coordinates> path = pathfinder.findPath(start, herbivore);
@@ -31,12 +32,13 @@ public class Predator extends Creature {
 
         next = getNextStep(path, worldMap.getEntity(herbivore));
 
-        attack(worldMap, herbivore);
+        attack(worldMap, herbivore, worldConfig);
 
         this.setHealth(this.getHealth() - getSpeed());
 
         if (this.getHealth() <= 0){
             worldMap.removeEntity(this.getCoordinates());
+            worldConfig.setPredators(worldConfig.getPredators() - 1);
             return;
         }
 
@@ -50,15 +52,15 @@ public class Predator extends Creature {
 
     }
 
-    private void attack(WorldMap worldMap,Coordinates herbivore) {
+    private void attack(WorldMap worldMap, Coordinates herbivore, WorldConfig worldConfig) {
         List<Coordinates> neighbours = worldMap.getNeighbours(this.getCoordinates(), this);
         for (Coordinates neighbour : neighbours) {
             Creature target = worldMap.getCreature(neighbour);
             if (target instanceof Herbivore) {
                 int damage = 50;
                 target.setHealth(target.getHealth() - damage);
-
                 if (target.getHealth() <= 0){
+                    worldConfig.setHerbivores(worldConfig.getHerbivores() - 1);
                     worldMap.removeEntity(herbivore);
                 }
             }

@@ -7,13 +7,15 @@ import pathfinders.BreadthFirstSearch;
 import render.RenderConsoleMap;
 import world.Coordinates;
 import world.Simulation;
+import world.WorldConfig;
 import world.WorldMap;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        Simulation simulation = new Simulation();
+        WorldConfig worldConfig = new WorldConfig();
+        Simulation simulation = new Simulation(worldConfig);
         simulation.run();
 
 

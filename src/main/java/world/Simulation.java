@@ -1,27 +1,28 @@
 package world;
 
-import actions.Action;
-import actions.InitActions;
-import actions.RenderAction;
-import actions.TurnActions;
+import actions.*;
 import pathfinders.BreadthFirstSearch;
 
 public class Simulation {
-    WorldMap map;
-    BreadthFirstSearch bfs;
+
+    private WorldMap map;
+    private BreadthFirstSearch bfs;
+    private WorldConfig worldConfig;
 
     Action turnAction;
     Action renderAction;
     Action initAction;
+    Action spawnAction;
 
-    public Simulation() {
-        this.map = new WorldMap();
-
+    public Simulation(WorldConfig worldConfig) {
+        this.map = new WorldMap(worldConfig);
+        this.worldConfig = worldConfig;
         this.bfs = new BreadthFirstSearch(map);
 
-        this.turnAction = new TurnActions(map,bfs);
+        this.turnAction = new TurnActions(map,bfs, worldConfig);
         this.renderAction = new RenderAction(map);
         this.initAction = new InitActions(map);
+        this.spawnAction = new SpawnActions(map, worldConfig);
 
     }
 
@@ -30,7 +31,7 @@ public class Simulation {
         while (true){
             renderAction.execute();
             turnAction.execute();
-
+            spawnAction.execute();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -39,5 +40,10 @@ public class Simulation {
             }
         }
     }
+
+
+
+
+
 
 }

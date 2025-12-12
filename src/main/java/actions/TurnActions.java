@@ -3,6 +3,7 @@ package actions;
 import entities.Entity;
 import entities.creature.Creature;
 import pathfinders.BreadthFirstSearch;
+import world.WorldConfig;
 import world.WorldMap;
 
 import java.util.ArrayList;
@@ -11,10 +12,12 @@ import java.util.List;
 public class TurnActions implements Action {
     WorldMap map;
     BreadthFirstSearch bfs;
+    WorldConfig worldConfig;
 
-    public TurnActions(WorldMap map, BreadthFirstSearch bfs) {
+    public TurnActions(WorldMap map, BreadthFirstSearch bfs,  WorldConfig worldConfig) {
         this.map = map;
         this.bfs = bfs;
+        this.worldConfig = worldConfig;
     }
 
     @Override
@@ -28,7 +31,7 @@ public class TurnActions implements Action {
 
         for (Creature creature : creatures) {
             if (map.getEntity(creature.getCoordinates()) == creature) {
-                creature.makeMove(bfs, map);
+                creature.makeMove(bfs, map, worldConfig);
             }
         }
     }

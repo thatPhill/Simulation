@@ -4,6 +4,7 @@ import entities.Entity;
 import entities.resource.Grass;
 import pathfinders.BreadthFirstSearch;
 import world.Coordinates;
+import world.WorldConfig;
 import world.WorldMap;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 public class Herbivore extends Creature {
 
     private static final int DEFAULT_SPEED = 1;
-    private static final int DEFAULT_HEALTH = 100;
+    private static final int DEFAULT_HEALTH = 1;
 
     public Herbivore(Coordinates coordinates, String emoji, int speed, int health) {
         super(coordinates, emoji, speed, health);
@@ -26,7 +27,7 @@ public class Herbivore extends Creature {
     }
 
     @Override
-    public void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap) {
+    public void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap, WorldConfig worldConfig) {
         Coordinates start = getCoordinates();
         Coordinates grass = findNearestTarget(worldMap, pathfinder);
         List<Coordinates> path = pathfinder.findPath(start, grass);
@@ -37,9 +38,13 @@ public class Herbivore extends Creature {
 
         next = getNextStep(path, worldMap.getEntity(grass));
 
-        if (next.equals(grass)) this.setHealth(this.getHealth() + 5);
+        if (next.equals(grass)){
+            this.setHealth(this.getHealth() + 5);
+            worldConfig.setGrass(worldConfig.getGrass() - 1);
+        }
 
         if (this.getHealth() <= 0){
+            worldConfig.setHerbivores(worldConfig.getHerbivores() - 1);
             worldMap.removeEntity(this.getCoordinates());
         } else {
             worldMap.removeEntity(start);

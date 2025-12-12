@@ -18,7 +18,7 @@ public class RenderConsoleMap {
                     System.out.print(EMPTY + " ");
                 } else {
                     if (entity instanceof Herbivore){
-                        System.out.print(((Herbivore) entity).getHealth());
+                        System.out.print(entity.getEmoji());
                     } else {
                         System.out.print(entity.getEmoji() + " ");
                     }

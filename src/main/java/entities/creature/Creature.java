@@ -4,6 +4,7 @@ import entities.Entity;
 import entities.resource.Grass;
 import pathfinders.BreadthFirstSearch;
 import world.Coordinates;
+import world.WorldConfig;
 import world.WorldMap;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public abstract class Creature extends Entity {
         this.health = health;
     }
 
-    public abstract void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap);
+    public abstract void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap, WorldConfig worldConfig);
 
     public abstract boolean isTarget(Entity entity);
 
