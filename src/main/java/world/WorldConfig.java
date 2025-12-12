@@ -2,57 +2,57 @@ package world;
 
 public class WorldConfig {
     private int size = 20;
-    private int grassCount = 10;
-    private int rocksCount = 10;
-    private int treesCount = 10;
-    private int herbivoresCount = 5;
-    private int predatorsCount = 3;
+    private int grass = 10;
+    private int rocks = 10;
+    private int trees = 10;
+    private int herbivores = 5;
+    private int predators = 3;
 
     public int getSize() {
         return size;
     }
 
-    public int getGrassCount() {
-        return grassCount;
+    public int getGrass() {
+        return grass;
     }
 
-    public int getRocksCount() {
-        return rocksCount;
+    public int getRocks() {
+        return rocks;
     }
 
-    public int getTreesCount() {
-        return treesCount;
+    public int getTrees() {
+        return trees;
     }
 
-    public int getHerbivoresCount() {
-        return herbivoresCount;
+    public int getHerbivores() {
+        return herbivores;
     }
 
-    public int getPredatorsCount() {
-        return predatorsCount;
+    public int getPredators() {
+        return predators;
     }
 
     public void setSize(int size) {
         this.size = size;
     }
 
-    public void setGrassCount(int grassCount) {
-        this.grassCount = grassCount;
+    public void setGrass(int grass) {
+        this.grass = grass;
     }
 
-    public void setRocksCount(int rocksCount) {
-        this.rocksCount = rocksCount;
+    public void setRocks(int rocks) {
+        this.rocks = rocks;
     }
 
-    public void setTreesCount(int treesCount) {
-        this.treesCount = treesCount;
+    public void setTrees(int trees) {
+        this.trees = trees;
     }
 
-    public void setHerbivoresCount(int herbivoresCount) {
-        this.herbivoresCount = herbivoresCount;
+    public void setHerbivores(int herbivores) {
+        this.herbivores = herbivores;
     }
 
-    public void setPredatorsCount(int predatorsCount) {
-        this.predatorsCount = predatorsCount;
+    public void setPredators(int predators) {
+        this.predators = predators;
     }
 }

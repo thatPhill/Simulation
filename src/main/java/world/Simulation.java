@@ -26,8 +26,8 @@ public class Simulation {
     }
 
     public void run(){
-        while (true){
             initAction.execute();
+        while (true){
             renderAction.execute();
             turnAction.execute();
 

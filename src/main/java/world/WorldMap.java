@@ -7,8 +7,6 @@ import entities.creature.Creature;
 import entities.creature.Herbivore;
 import entities.creature.Predator;
 import entities.resource.Grass;
-import entities.stative.Rock;
-import entities.stative.Tree;
 
 import java.util.*;
 
@@ -32,6 +30,11 @@ public class WorldMap {
     }
 
     public void setupEntitiesPositions() {
+        int grassCount = config.getGrass();
+        int rockCount = config.getRocks();
+        int herbivoreCount = config.getHerbivores();
+        int predatorCount = config.getPredators();
+        int treeCount = config.getTrees();
         List<Coordinates> availablePositions = new ArrayList<>();
 
         for (int x = 0; x < config.getSize(); x++) {
@@ -44,34 +47,34 @@ public class WorldMap {
 
         Iterator<Coordinates> iterator = availablePositions.iterator();
 
-        while (config.getGrassCount() > 0 && iterator.hasNext()) {
+        while (grassCount > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             setEntity(pos, EntityFactory.createEntity(EntityType.GRASS, pos));
-            config.setGrassCount(config.getGrassCount() - 1);
+            grassCount--;
         }
 
-        while (config.getRocksCount() > 0 && iterator.hasNext()) {
+        while (rockCount > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             setEntity(pos, EntityFactory.createEntity(EntityType.ROCK, pos));
-            config.setRocksCount(config.getRocksCount() - 1);
+            rockCount--;
         }
 
-        while (config.getTreesCount() > 0 && iterator.hasNext()) {
+        while (treeCount > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             setEntity(pos, EntityFactory.createEntity(EntityType.TREE, pos));
-            config.setTreesCount(config.getTreesCount() - 1);
+            treeCount--;
         }
 
-        while (config.getHerbivoresCount() > 0 && iterator.hasNext()) {
+        while (herbivoreCount > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             setEntity(pos, EntityFactory.createEntity(EntityType.HERBIVORE, pos));
-            config.setHerbivoresCount(config.getHerbivoresCount() - 1);
+            herbivoreCount--;
         }
 
-        while (config.getPredatorsCount() > 0 && iterator.hasNext()) {
+        while (predatorCount > 0 && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             setEntity(pos, EntityFactory.createEntity(EntityType.PREDATOR, pos));
-            config.setPredatorsCount(config.getPredatorsCount() - 1);
+            predatorCount--;
         }
 
 
@@ -127,6 +130,7 @@ public class WorldMap {
     public void setSize(int size) {
         config.setSize(size);
     }
+
     public HashMap<Coordinates, Entity> getEntitiesMap() {
         return entitiesMap;
     }
