@@ -12,7 +12,7 @@ import java.util.List;
 public class Herbivore extends Creature {
 
     private static final int DEFAULT_SPEED = 1;
-    private static final int DEFAULT_HEALTH = 1;
+    private static final int DEFAULT_HEALTH = 10;
 
     public Herbivore(Coordinates coordinates, String emoji, int speed, int health) {
         super(coordinates, emoji, speed, health);

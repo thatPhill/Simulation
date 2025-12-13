@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        WorldConfig worldConfig = new WorldConfig();
+        WorldConfig worldConfig = new WorldConfig(10,10,10,10,5,3);
         Simulation simulation = new Simulation(worldConfig);
         simulation.run();
 
