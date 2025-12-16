@@ -1,22 +1,11 @@
-import actions.Action;
-import entities.creature.Herbivore;
-import entities.creature.Predator;
-import entities.resource.Grass;
-import entities.stative.Tree;
-import pathfinders.BreadthFirstSearch;
-import render.RenderConsoleMap;
-import world.Coordinates;
 import world.Simulation;
 import world.WorldConfig;
-import world.WorldMap;
-
-import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        WorldConfig worldConfig = new WorldConfig(10,10,10,10,5,3);
+    public static void main(String[] args) {
+        WorldConfig worldConfig = new WorldConfig(20,10,10,10,5,3);
         Simulation simulation = new Simulation(worldConfig);
-        simulation.run();
+        simulation.start();
 
 
 
