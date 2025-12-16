@@ -46,6 +46,7 @@ public class Simulation {
                         MessagePrinter.printEatenGrasses();
                         MessagePrinter.printEatenHerbivores();
                         MessagePrinter.printDiedPredators();
+                        MessagePrinter.printKeyForResume();
                     } else {
                         MessagePrinter.printAlreadyPause();
                     }
@@ -83,6 +84,7 @@ public class Simulation {
                 }
             }
             renderAction.execute();
+            MessagePrinter.printKeyForPause();
             turnAction.execute();
             spawnAction.execute();
 

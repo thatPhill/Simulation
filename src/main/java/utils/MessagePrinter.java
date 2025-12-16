@@ -34,4 +34,13 @@ public class MessagePrinter {
         System.out.println("За время симуляции умерло: " + SpawnActions.countPredators + " " + EntityType.PREDATOR.getEmoji());
     }
 
+    public static void printKeyForPause() {
+        System.out.println("Для паузы введите букву - \"P\"");
+    }
+
+    public static void printKeyForResume() {
+        System.out.println("Для возобновление симуляции введите букву - \"S\"");
+    }
+
+
 }
