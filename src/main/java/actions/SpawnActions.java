@@ -39,21 +39,18 @@ public class SpawnActions implements Action{
         while (totalGrass != worldConfig.getGrass() && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             map.setEntity(pos, EntityFactory.createEntity(EntityType.GRASS, pos));
-            System.out.println("grass ЗАСПАУНИЛСЯ НА " + pos.toString());
             worldConfig.setGrass(worldConfig.getGrass() + 1);
             countGrass++;
         }
         while (totalPredators != worldConfig.getPredators() && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             map.setEntity(pos, EntityFactory.createEntity(EntityType.PREDATOR, pos));
-            System.out.println("PREDATOR ЗАСПАУНИЛСЯ НА " + pos.toString());
             worldConfig.setPredators(worldConfig.getPredators() + 1);
             countPredators++;
         }
         while (totalHerbivores != worldConfig.getHerbivores() && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             map.setEntity(pos, EntityFactory.createEntity(EntityType.HERBIVORE, pos));
-            System.out.println("herbivore ЗАСПАУНИЛСЯ НА " + pos.toString());
             worldConfig.setHerbivores(worldConfig.getHerbivores() + 1);
             countHerbivores++;
         }
