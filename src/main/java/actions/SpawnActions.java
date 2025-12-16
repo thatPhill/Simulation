@@ -14,16 +14,20 @@ import java.util.List;
 public class SpawnActions implements Action{
     private final WorldMap map;
     WorldConfig worldConfig;
-    private int grassCount;
-    private int predatorCount;
-    private int herbivoreCount;
+    private int totalGrass;
+    private int totalPredators;
+    private int totalHerbivores;
+
+    public static int countGrass = 0;
+    public static int countPredators = 0;
+    public static int countHerbivores = 0;
 
     public SpawnActions(WorldMap map,  WorldConfig worldConfig) {
         this.map = map;
         this.worldConfig = worldConfig;
-        grassCount = worldConfig.getGrass();
-        predatorCount = worldConfig.getPredators();
-        herbivoreCount = worldConfig.getHerbivores();
+        totalGrass = worldConfig.getGrass();
+        totalPredators = worldConfig.getPredators();
+        totalHerbivores = worldConfig.getHerbivores();
     }
 
     @Override
@@ -32,23 +36,26 @@ public class SpawnActions implements Action{
 
        Iterator<Coordinates> iterator = emptyPositions.iterator();
 
-        while (grassCount != worldConfig.getGrass() && iterator.hasNext()) {
+        while (totalGrass != worldConfig.getGrass() && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             map.setEntity(pos, EntityFactory.createEntity(EntityType.GRASS, pos));
             System.out.println("grass ЗАСПАУНИЛСЯ НА " + pos.toString());
             worldConfig.setGrass(worldConfig.getGrass() + 1);
+            countGrass++;
         }
-        while (predatorCount != worldConfig.getPredators() && iterator.hasNext()) {
+        while (totalPredators != worldConfig.getPredators() && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             map.setEntity(pos, EntityFactory.createEntity(EntityType.PREDATOR, pos));
             System.out.println("PREDATOR ЗАСПАУНИЛСЯ НА " + pos.toString());
             worldConfig.setPredators(worldConfig.getPredators() + 1);
+            countPredators++;
         }
-        while (herbivoreCount != worldConfig.getHerbivores() && iterator.hasNext()) {
+        while (totalHerbivores != worldConfig.getHerbivores() && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             map.setEntity(pos, EntityFactory.createEntity(EntityType.HERBIVORE, pos));
             System.out.println("herbivore ЗАСПАУНИЛСЯ НА " + pos.toString());
             worldConfig.setHerbivores(worldConfig.getHerbivores() + 1);
+            countHerbivores++;
         }
 
     }
@@ -71,27 +78,27 @@ private List<Coordinates> findEmptyPositions(WorldMap map){
 
 
 
-    public int getHerbivoreCount() {
-        return herbivoreCount;
+    public int getTotalHerbivores() {
+        return totalHerbivores;
     }
 
-    public void setHerbivoreCount(int herbivoreCount) {
-        this.herbivoreCount = herbivoreCount;
+    public void setTotalHerbivores(int totalHerbivores) {
+        this.totalHerbivores = totalHerbivores;
     }
 
     public int getPredatorCount() {
-        return predatorCount;
+        return totalPredators;
     }
 
     public void setPredatorCount(int predatorCount) {
-        this.predatorCount = predatorCount;
+        this.totalPredators = predatorCount;
     }
 
-    public int getGrassCount() {
-        return grassCount;
+    public int getTotalGrass() {
+        return totalGrass;
     }
 
-    public void setGrassCount(int grassCount) {
-        this.grassCount = grassCount;
+    public void setTotalGrass(int totalGrass) {
+        this.totalGrass = totalGrass;
     }
 }
