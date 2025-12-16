@@ -4,6 +4,7 @@ import entities.Entity;
 import entities.EntityType;
 import entities.creature.Herbivore;
 import world.Coordinates;
+import world.Simulation;
 import world.WorldMap;
 
 public class RenderConsoleMap {
@@ -27,5 +28,6 @@ public class RenderConsoleMap {
             }
             System.out.println();
         }
+        System.out.println("Turn - " + Simulation.turnCount++);
     }
 }

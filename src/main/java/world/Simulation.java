@@ -4,7 +4,7 @@ import actions.*;
 import pathfinders.BreadthFirstSearch;
 
 public class Simulation {
-
+    public static int turnCount = 0;
     private WorldMap map;
     private BreadthFirstSearch bfs;
     private WorldConfig worldConfig;
