@@ -2,6 +2,7 @@ package world;
 
 import actions.*;
 import pathfinders.BreadthFirstSearch;
+import utils.MessagePrinter;
 
 import java.util.Scanner;
 
@@ -35,22 +36,26 @@ public class Simulation {
 
     private void handleInput() {
         Scanner scanner = new Scanner(System.in);
+
         while (isRunning) {
             if (scanner.hasNextLine()) {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("P")) {
                     if (!isPaused) {
-                        System.out.println("--------------------------SIMULATION PAUSED--------------------------");
+                        MessagePrinter.printPause();
+                        MessagePrinter.printEatenGrasses();
+                        MessagePrinter.printEatenHerbivores();
+                        MessagePrinter.printDiedPredators();
                     } else {
-                        System.out.println("--------------------------ALREADY PAUSED--------------------------");
+                        MessagePrinter.printAlreadyPause();
                     }
                     isPaused = true;
 
                 } else if (input.equalsIgnoreCase("S")) {
                     if (isPaused) {
-                        System.out.println("--------------------------SIMULATION RESUMED--------------------------");
-                    }  else {
-                        System.out.println("--------------------------ALREADY RUNNING--------------------------");
+                        MessagePrinter.printSimulationResumed();
+                    } else {
+                        MessagePrinter.printSimulationAlreadyResumed();
                     }
                     isPaused = false;
                     // Разбудить основной поток, если он ждет
