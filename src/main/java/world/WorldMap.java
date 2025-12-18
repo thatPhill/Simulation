@@ -111,8 +111,8 @@ public class WorldMap {
         };
 
         for (int[] direction : directions) {
-            int newX = coord.getX() + direction[0];
-            int newY = coord.getY() + direction[1];
+            int newX = coord.x() + direction[0];
+            int newY = coord.y() + direction[1];
 
             if (newX >= 0 && newX < getSize() && newY >= 0 && newY < getSize()) {
                 if (isCellWalkable(newX, newY, mover)) {
