@@ -37,7 +37,7 @@ public class Predator extends Creature {
 
         next = getNextStep(path, worldMap.getEntity(herbivore));
 
-        attack(worldMap, herbivore, worldConfig);
+        attack(worldMap, herbivore, worldConfig, pathfinder);
 
         this.setHealth(this.getHealth() - getSpeed());
 
@@ -57,8 +57,8 @@ public class Predator extends Creature {
 
     }
 
-    private void attack(WorldMap worldMap, Coordinates herbivore, WorldConfig worldConfig) {
-        List<Coordinates> neighbours = worldMap.getNeighbours(this.getCoordinates(), this);
+    private void attack(WorldMap worldMap, Coordinates herbivore, WorldConfig worldConfig, BreadthFirstSearch bfs) {
+        List<Coordinates> neighbours = bfs.getNeighbours(this.getCoordinates(), this);
         for (Coordinates neighbour : neighbours) {
             Creature target = (Creature) worldMap.getEntity(neighbour);
             if (target instanceof Herbivore) {

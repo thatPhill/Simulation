@@ -66,31 +66,6 @@ public class WorldMap {
     }
 
 
-    public List<Coordinates> getNeighbours(Coordinates coord, Creature mover) {
-        List<Coordinates> neighbours = new ArrayList<>();
-        int[][] directions = {
-                {0, 1},   // right
-                {1, 0},   // down
-                {0, -1},  // left
-                {-1, 0},  // up
-                {-1, -1},// up-left
-                {-1, 1}, // up-right
-                {1, 1}, // down-right
-                {1, -1} //down-left
-        };
-
-        for (int[] direction : directions) {
-            int newX = coord.x() + direction[0];
-            int newY = coord.y() + direction[1];
-
-            if (newX >= 0 && newX < getSize() && newY >= 0 && newY < getSize()) {
-                if (isCellWalkable(newX, newY, mover)) {
-                    neighbours.add(new Coordinates(newX, newY));
-                }
-            }
-        }
-        return neighbours;
-    }
 
     public int getSize() {
         return config.getSize();
