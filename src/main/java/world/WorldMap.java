@@ -21,12 +21,26 @@ public class WorldMap {
     private final HashMap<Coordinates, Entity> entitiesMap = new HashMap<>();
 
     public void setEntity(Coordinates coordinates, Entity entity) {
-        entity.setCoordinates(coordinates);
-        entitiesMap.put(coordinates, entity);
+        if (    coordinates.x() >= 0 &&
+                coordinates.x() < config.getSize() &&
+                coordinates.y() >= 0 &&
+                coordinates.y() < config.getSize()) {
+            entity.setCoordinates(coordinates);
+            entitiesMap.put(coordinates, entity);
+        } else {
+            throw new IllegalArgumentException("Coordinates out of bounds: " + coordinates);
+        }
     }
 
     public void removeEntity(Coordinates coordinates) {
+        if (    coordinates.x() >= 0 &&
+                coordinates.x() < config.getSize() &&
+                coordinates.y() >= 0 &&
+                coordinates.y() < config.getSize()) {
         entitiesMap.remove(coordinates);
+        } else {
+            throw new IllegalArgumentException("Coordinates out of bounds: " + coordinates);
+        }
     }
 
     public void setupEntitiesPositions() {
@@ -84,13 +98,13 @@ public class WorldMap {
     public boolean isCellWalkable(int x, int y, Creature mover) {
         Entity entity = getEntity(new Coordinates(x, y));
 
-        if (entity == null){
+        if (entity == null) {
             return true;
         }
-        if (entity instanceof Grass && mover instanceof Herbivore){
+        if (entity instanceof Grass && mover instanceof Herbivore) {
             return true;
         }
-        if (entity instanceof Herbivore && mover instanceof Predator){
+        if (entity instanceof Herbivore && mover instanceof Predator) {
             return true;
         }
         return false;
@@ -100,6 +114,9 @@ public class WorldMap {
         return entitiesMap.get(coordinates);
     }
 
+    public Creature getCreature(Coordinates coordinates) {
+        return (Creature) entitiesMap.get(coordinates);
+    }
 
     public List<Coordinates> getNeighbours(Coordinates coord, Creature mover) {
         List<Coordinates> neighbours = new ArrayList<>();
