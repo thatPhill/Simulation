@@ -9,6 +9,7 @@ import entities.creature.Predator;
 import entities.resource.Grass;
 
 import java.util.*;
+import java.util.function.Function;
 
 public class WorldMap {
     private final WorldConfig config;
@@ -37,9 +38,18 @@ public class WorldMap {
                 coordinates.x() < config.getSize() &&
                 coordinates.y() >= 0 &&
                 coordinates.y() < config.getSize()) {
-        entitiesMap.remove(coordinates);
+            entitiesMap.remove(coordinates);
         } else {
             throw new IllegalArgumentException("Coordinates out of bounds: " + coordinates);
+        }
+    }
+
+    private void spawn(Iterator<Coordinates> iterator, Function<Coordinates, Entity> mapper, int count) {
+        while (0 < count && iterator.hasNext()) {
+            Coordinates pos = iterator.next();
+            Entity entity = mapper.apply(pos);
+            setEntity(pos, entity);
+            count--;
         }
     }
 
@@ -61,39 +71,14 @@ public class WorldMap {
 
         Iterator<Coordinates> iterator = availablePositions.iterator();
 
-        while (grassCount > 0 && iterator.hasNext()) {
-            Coordinates pos = iterator.next();
-            setEntity(pos, EntityFactory.createEntity(EntityType.GRASS, pos));
-            grassCount--;
-        }
-
-        while (rockCount > 0 && iterator.hasNext()) {
-            Coordinates pos = iterator.next();
-            setEntity(pos, EntityFactory.createEntity(EntityType.ROCK, pos));
-            rockCount--;
-        }
-
-        while (treeCount > 0 && iterator.hasNext()) {
-            Coordinates pos = iterator.next();
-            setEntity(pos, EntityFactory.createEntity(EntityType.TREE, pos));
-            treeCount--;
-        }
-
-        while (herbivoreCount > 0 && iterator.hasNext()) {
-            Coordinates pos = iterator.next();
-            setEntity(pos, EntityFactory.createEntity(EntityType.HERBIVORE, pos));
-            herbivoreCount--;
-        }
-
-        while (predatorCount > 0 && iterator.hasNext()) {
-            Coordinates pos = iterator.next();
-            setEntity(pos, EntityFactory.createEntity(EntityType.PREDATOR, pos));
-            predatorCount--;
-        }
+        spawn(iterator, pos -> EntityFactory.createEntity(EntityType.GRASS, pos), grassCount);
+        spawn(iterator, pos -> EntityFactory.createEntity(EntityType.ROCK, pos), rockCount);
+        spawn(iterator, pos -> EntityFactory.createEntity(EntityType.TREE, pos), treeCount);
+        spawn(iterator, pos -> EntityFactory.createEntity(EntityType.HERBIVORE, pos), herbivoreCount);
+        spawn(iterator, pos -> EntityFactory.createEntity(EntityType.PREDATOR, pos), predatorCount);
 
 
     }
-
 
     public boolean isCellWalkable(int x, int y, Creature mover) {
         Entity entity = getEntity(new Coordinates(x, y));
