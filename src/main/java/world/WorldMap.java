@@ -83,9 +83,16 @@ public class WorldMap {
 
     public boolean isCellWalkable(int x, int y, Creature mover) {
         Entity entity = getEntity(new Coordinates(x, y));
-        if (entity == null) return true;
-        if (entity instanceof Grass && mover instanceof Herbivore) return true;
-        if (entity instanceof Herbivore && mover instanceof Predator) return true;
+
+        if (entity == null){
+            return true;
+        }
+        if (entity instanceof Grass && mover instanceof Herbivore){
+            return true;
+        }
+        if (entity instanceof Herbivore && mover instanceof Predator){
+            return true;
+        }
         return false;
     }
 

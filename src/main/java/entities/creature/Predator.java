@@ -28,7 +28,10 @@ public class Predator extends Creature {
         Coordinates start = getCoordinates();
         Coordinates herbivore = findNearestTarget(worldMap, pathfinder);
         List<Coordinates> path = pathfinder.find(start, herbivore);
-        if (path == null || path.isEmpty()) return;
+
+        if (path == null || path.isEmpty()){
+            return;
+        }
 
         Coordinates next = null;
 

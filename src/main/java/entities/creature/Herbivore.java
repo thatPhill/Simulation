@@ -31,7 +31,9 @@ public class Herbivore extends Creature {
         Coordinates start = getCoordinates();
         Coordinates grass = findNearestTarget(worldMap, pathfinder);
         List<Coordinates> path = pathfinder.find(start, grass);
-        if (path == null || path.isEmpty()) return;
+        if (path == null || path.isEmpty()){
+            return;
+        }
 
         Coordinates next = null;
         this.setHealth(this.getHealth() - 1);
