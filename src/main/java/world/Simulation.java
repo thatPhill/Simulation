@@ -30,7 +30,7 @@ public class Simulation {
         this.bfs = new BreadthFirstSearch(map);
         this.turnAction = new TurnAction(map, bfs, worldConfig);
         this.renderAction = new RenderAction(map);
-        this.initAction = new InitAction(map);
+        this.initAction = new InitAction(map,worldConfig);
         this.spawnAction = new SpawnAction(map, worldConfig);
 
         Thread inputThread = new Thread(this::handleInput);
