@@ -27,7 +27,7 @@ public class Predator extends Creature {
     public void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap, WorldConfig worldConfig) {
         Coordinates start = getCoordinates();
         Coordinates herbivore = findNearestTarget(worldMap, pathfinder);
-        List<Coordinates> path = pathfinder.findPath(start, herbivore);
+        List<Coordinates> path = pathfinder.find(start, herbivore);
         if (path == null || path.isEmpty()) return;
 
         Coordinates next = null;

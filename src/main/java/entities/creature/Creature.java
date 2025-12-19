@@ -31,7 +31,7 @@ public abstract class Creature extends Entity {
         for (Coordinates mapCoordinates : worldMap.getEntitiesMap().keySet()) {
             if (isTarget(worldMap.getEntitiesMap().get(mapCoordinates))) {
                 pathfinder.setMover(this);
-                int currentSize = pathfinder.findPath(creatureCoordinates, mapCoordinates).size();
+                int currentSize = pathfinder.find(creatureCoordinates, mapCoordinates).size();
                 if (currentSize < minimalSizePath) {
                     minimalSizePath = currentSize;
                     nearestTargetCoordinates = mapCoordinates;

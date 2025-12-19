@@ -18,7 +18,7 @@ public class BreadthFirstSearch implements PathFinder {
     }
 
     @Override
-    public List<Coordinates> findPath(Coordinates start, Coordinates goal) {
+    public List<Coordinates> find(Coordinates start, Coordinates goal) {
         Queue<Coordinates> queue = new LinkedList<>();
         Map<Coordinates, Coordinates> parentMap = new HashMap<>();
         Set<Coordinates> visited = new HashSet<>();

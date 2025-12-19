@@ -30,7 +30,7 @@ public class Herbivore extends Creature {
     public void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap, WorldConfig worldConfig) {
         Coordinates start = getCoordinates();
         Coordinates grass = findNearestTarget(worldMap, pathfinder);
-        List<Coordinates> path = pathfinder.findPath(start, grass);
+        List<Coordinates> path = pathfinder.find(start, grass);
         if (path == null || path.isEmpty()) return;
 
         Coordinates next = null;
