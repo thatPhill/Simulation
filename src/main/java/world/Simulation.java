@@ -2,6 +2,7 @@ package world;
 
 import actions.*;
 import pathfinders.BreadthFirstSearch;
+import render.RenderConsoleMap;
 import utils.MessagePrinter;
 
 import java.util.Scanner;
@@ -13,10 +14,10 @@ public class Simulation {
     private WorldConfig worldConfig;
     public final static String PAUSE_KEY = "P";
     public final static String RESUME_KEY = "S";
+    private RenderConsoleMap render =  new RenderConsoleMap();
 
 
     Action turnAction;
-    Action renderAction;
     Action initAction;
     Action spawnAction;
 
@@ -29,7 +30,6 @@ public class Simulation {
         this.worldConfig = worldConfig;
         this.bfs = new BreadthFirstSearch(map);
         this.turnAction = new TurnAction(map, bfs, worldConfig);
-        this.renderAction = new RenderAction(map);
         this.initAction = new InitAction(map,worldConfig);
         this.spawnAction = new SpawnAction(map, worldConfig);
 
@@ -86,7 +86,7 @@ public class Simulation {
                     }
                 }
             }
-            renderAction.execute();
+            render.render(map);
             MessagePrinter.printKeyForPause();
             turnAction.execute();
             spawnAction.execute();
