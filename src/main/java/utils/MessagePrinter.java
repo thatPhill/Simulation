@@ -1,6 +1,6 @@
 package utils;
 
-import actions.SpawnActions;
+import actions.SpawnAction;
 import entities.EntityType;
 
 public class MessagePrinter {
@@ -23,15 +23,15 @@ public class MessagePrinter {
     }
 
     public static void printEatenGrasses() {
-        System.out.println("За время симуляции было съедено: " + SpawnActions.countGrass + " " + EntityType.GRASS.getEmoji());
+        System.out.println("За время симуляции было съедено: " + SpawnAction.countGrass + " " + EntityType.GRASS.getEmoji());
     }
 
     public static void printEatenHerbivores() {
-        System.out.println("За время симуляции было съедено: " + SpawnActions.countHerbivores + " " + EntityType.HERBIVORE.getEmoji());
+        System.out.println("За время симуляции было съедено: " + SpawnAction.countHerbivores + " " + EntityType.HERBIVORE.getEmoji());
     }
 
     public static void printDiedPredators() {
-        System.out.println("За время симуляции умерло: " + SpawnActions.countPredators + " " + EntityType.PREDATOR.getEmoji());
+        System.out.println("За время симуляции умерло: " + SpawnAction.countPredators + " " + EntityType.PREDATOR.getEmoji());
     }
 
     public static void printKeyForPause() {

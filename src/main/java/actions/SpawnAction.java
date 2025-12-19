@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class SpawnActions implements Action{
+public class SpawnAction implements Action{
     private final WorldMap map;
     WorldConfig worldConfig;
     private int totalGrass;
@@ -22,7 +22,7 @@ public class SpawnActions implements Action{
     public static int countPredators = 0;
     public static int countHerbivores = 0;
 
-    public SpawnActions(WorldMap map,  WorldConfig worldConfig) {
+    public SpawnAction(WorldMap map, WorldConfig worldConfig) {
         this.map = map;
         this.worldConfig = worldConfig;
         totalGrass = worldConfig.getGrass();

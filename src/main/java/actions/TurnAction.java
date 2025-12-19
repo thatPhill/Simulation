@@ -9,12 +9,12 @@ import world.WorldMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TurnActions implements Action {
+public class TurnAction implements Action {
     WorldMap map;
     BreadthFirstSearch bfs;
     WorldConfig worldConfig;
 
-    public TurnActions(WorldMap map, BreadthFirstSearch bfs,  WorldConfig worldConfig) {
+    public TurnAction(WorldMap map, BreadthFirstSearch bfs, WorldConfig worldConfig) {
         this.map = map;
         this.bfs = bfs;
         this.worldConfig = worldConfig;

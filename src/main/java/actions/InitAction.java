@@ -3,10 +3,10 @@ package actions;
 import world.WorldMap;
 
 
-public class InitActions implements Action {
+public class InitAction implements Action {
     WorldMap map;
 
-    public InitActions(WorldMap map) {
+    public InitAction(WorldMap map) {
         this.map = map;
     }
 
