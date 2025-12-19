@@ -72,30 +72,4 @@ private List<Coordinates> findEmptyPositions(WorldMap map){
         return emptyPositions;
 }
 
-
-
-
-    public int getTotalHerbivores() {
-        return totalHerbivores;
-    }
-
-    public void setTotalHerbivores(int totalHerbivores) {
-        this.totalHerbivores = totalHerbivores;
-    }
-
-    public int getPredatorCount() {
-        return totalPredators;
-    }
-
-    public void setPredatorCount(int predatorCount) {
-        this.totalPredators = predatorCount;
-    }
-
-    public int getTotalGrass() {
-        return totalGrass;
-    }
-
-    public void setTotalGrass(int totalGrass) {
-        this.totalGrass = totalGrass;
-    }
 }
