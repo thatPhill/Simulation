@@ -9,8 +9,11 @@ public class WorldConfig {
     private int herbivores;
     private int predators;
 
+    private final static int MIN_WORLD_SIZE = 10;
+    private final static int MAX_WORLD_SIZE = 50;
+
     public WorldConfig(int size, int grass, int rocks, int trees, int herbivores, int predators) {
-        if (size >= 10 && size <= 50) {
+        if (size >= MIN_WORLD_SIZE && size <= MAX_WORLD_SIZE) {
             if (grass > (size / 2)) {
                 throw new IllegalArgumentException("Too much grass.");
             }
@@ -62,26 +65,44 @@ public class WorldConfig {
     }
 
     public void setSize(int size) {
-        this.size = size;
+        if (size >= MIN_WORLD_SIZE && size <= MAX_WORLD_SIZE) {
+            this.size = size;
+        }
+        throw new IllegalArgumentException("Size must be between 10 and 50.");
     }
 
     public void setGrass(int grass) {
-        this.grass = grass;
+        if (grass > (size / 2)) {
+        throw new IllegalArgumentException("Too much grass.");
+        }
+            this.grass = grass;
     }
 
     public void setRocks(int rocks) {
-        this.rocks = rocks;
+        if (rocks > (size / 2)) {
+        throw new IllegalArgumentException("Too much rock.");
+        }
+            this.rocks = rocks;
     }
 
     public void setTrees(int trees) {
-        this.trees = trees;
+        if (trees > (size / 2)) {
+        throw new IllegalArgumentException("Too much trees.");
+        }
+            this.trees = trees;
     }
 
     public void setHerbivores(int herbivores) {
-        this.herbivores = herbivores;
+        if (herbivores > (size / 3)) {
+        throw new IllegalArgumentException("Too much herbivores.");
+        }
+            this.herbivores = herbivores;
     }
 
     public void setPredators(int predators) {
-        this.predators = predators;
+        if (predators > (size / 3)) {
+        throw new IllegalArgumentException("Too much predators.");
+        }
+            this.predators = predators;
     }
 }
