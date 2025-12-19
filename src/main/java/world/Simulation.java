@@ -14,12 +14,12 @@ public class Simulation {
     private WorldConfig worldConfig;
     public final static String PAUSE_KEY = "P";
     public final static String RESUME_KEY = "S";
-    private RenderConsoleMap render =  new RenderConsoleMap();
+    private RenderConsoleMap render = new RenderConsoleMap();
 
 
-    Action turnAction;
-    Action initAction;
-    Action spawnAction;
+    private final Action initAction;
+    private final Action turnAction;
+    private final Action spawnAction;
 
     private volatile boolean isPaused = false;
     private volatile boolean isRunning = true;
@@ -30,7 +30,7 @@ public class Simulation {
         this.worldConfig = worldConfig;
         this.bfs = new BreadthFirstSearch(map);
         this.turnAction = new TurnAction(map, bfs, worldConfig);
-        this.initAction = new InitAction(map,worldConfig);
+        this.initAction = new InitAction(map, worldConfig);
         this.spawnAction = new SpawnAction(map, worldConfig);
 
         Thread inputThread = new Thread(this::handleInput);
