@@ -73,6 +73,13 @@ public class Simulation {
         scanner.close();
     }
 
+    private void nextTurn(){
+        render.render(map);
+        MessagePrinter.printKeyForPause();
+        turnAction.execute();
+        spawnAction.execute();
+    }
+
     public void start() {
         initAction.execute();
         while (isRunning) {
@@ -86,11 +93,7 @@ public class Simulation {
                     }
                 }
             }
-            render.render(map);
-            MessagePrinter.printKeyForPause();
-            turnAction.execute();
-            spawnAction.execute();
-
+            nextTurn();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
