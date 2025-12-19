@@ -60,7 +60,7 @@ public class Predator extends Creature {
     private void attack(WorldMap worldMap, Coordinates herbivore, WorldConfig worldConfig) {
         List<Coordinates> neighbours = worldMap.getNeighbours(this.getCoordinates(), this);
         for (Coordinates neighbour : neighbours) {
-            Creature target = worldMap.getCreature(neighbour);
+            Creature target = (Creature) worldMap.getEntity(neighbour);
             if (target instanceof Herbivore) {
                 setDamage(10);
                 target.setHealth(target.getHealth() - getDamage());
