@@ -2,6 +2,7 @@ package utils;
 
 import actions.SpawnAction;
 import entities.EntityType;
+import world.Simulation;
 
 public class MessagePrinter {
 
@@ -36,11 +37,11 @@ public class MessagePrinter {
     }
 
     public static void printKeyForPause() {
-        System.out.println("Для паузы введите букву - \"P\"");
+        System.out.printf("Для паузы введите букву - %s \n", Simulation.PAUSE_KEY);
     }
 
     public static void printKeyForResume() {
-        System.out.println("Для возобновление симуляции введите букву - \"S\"");
+        System.out.printf("Для возобновление симуляции введите букву - %s \n", Simulation.RESUME_KEY);
     }
 
 

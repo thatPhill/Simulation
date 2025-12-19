@@ -11,6 +11,9 @@ public class Simulation {
     private WorldMap map;
     private BreadthFirstSearch bfs;
     private WorldConfig worldConfig;
+    public final static String PAUSE_KEY = "P";
+    public final static String RESUME_KEY = "S";
+
 
     Action turnAction;
     Action renderAction;
@@ -40,7 +43,7 @@ public class Simulation {
         while (isRunning) {
             if (scanner.hasNextLine()) {
                 String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("P")) {
+                if (input.equalsIgnoreCase(PAUSE_KEY)) {
                     if (!isPaused) {
                         MessagePrinter.printPause();
                         MessagePrinter.printEatenGrasses();
@@ -52,7 +55,7 @@ public class Simulation {
                     }
                     isPaused = true;
 
-                } else if (input.equalsIgnoreCase("S")) {
+                } else if (input.equalsIgnoreCase(RESUME_KEY)) {
                     if (isPaused) {
                         MessagePrinter.printSimulationResumed();
                     } else {
