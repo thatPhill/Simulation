@@ -30,7 +30,7 @@ public class InitAction implements Action {
         setupEntitiesPositions();
     }
 
-    void spawn(Iterator<Coordinates> iterator, Function<Coordinates, Entity> mapper, int count) {
+   private void spawn(Iterator<Coordinates> iterator, Function<Coordinates, Entity> mapper, int count) {
         while (0 < count && iterator.hasNext()) {
             Coordinates pos = iterator.next();
             Entity entity = mapper.apply(pos);
@@ -39,7 +39,7 @@ public class InitAction implements Action {
         }
     }
 
-    public void setupEntitiesPositions() {
+    private void setupEntitiesPositions() {
         int grassCount = config.getGrass();
         int rockCount = config.getRocks();
         int herbivoreCount = config.getHerbivores();
