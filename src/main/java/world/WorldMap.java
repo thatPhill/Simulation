@@ -99,9 +99,6 @@ public class WorldMap {
         return entitiesMap.get(coordinates);
     }
 
-    public Creature getCreature(Coordinates coordinates) {
-        return (Creature) entitiesMap.get(coordinates);
-    }
 
     public List<Coordinates> getNeighbours(Coordinates coord, Creature mover) {
         List<Coordinates> neighbours = new ArrayList<>();
