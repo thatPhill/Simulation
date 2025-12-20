@@ -9,12 +9,12 @@ import java.util.Scanner;
 
 public class Simulation {
     public static int turnCount = 0;
-    private WorldMap map;
-    private BreadthFirstSearch bfs;
-    private WorldConfig worldConfig;
+    private final WorldMap map;
+    private final BreadthFirstSearch bfs;
+    private final WorldConfig worldConfig;
     public final static String PAUSE_KEY = "P";
     public final static String RESUME_KEY = "S";
-    private RenderConsoleMap render = new RenderConsoleMap();
+    private final RenderConsoleMap render = new RenderConsoleMap();
 
 
     private final Action initAction;
