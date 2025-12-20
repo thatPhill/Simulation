@@ -26,7 +26,7 @@ public class Simulation {
     private final Object pauseLock = new Object(); // Объект для синхронизации паузы
 
     public Simulation(WorldConfig worldConfig) {
-        this.map = new WorldMap(worldConfig);
+        this.map = new WorldMap(worldConfig.getSize());
         this.worldConfig = worldConfig;
         this.bfs = new BreadthFirstSearch(map);
         this.turnAction = new TurnAction(map, bfs, worldConfig);

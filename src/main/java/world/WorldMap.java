@@ -12,20 +12,20 @@ import java.util.*;
 import java.util.function.Function;
 
 public class WorldMap {
-    private final WorldConfig config;
+    private int size;
 
 
-    public WorldMap(WorldConfig config) {
-        this.config = config;
+    public WorldMap(int size) {
+        this.size = size;
     }
 
     private final HashMap<Coordinates, Entity> entitiesMap = new HashMap<>();
 
     public void setEntity(Coordinates coordinates, Entity entity) {
         if (    coordinates.x() >= 0 &&
-                coordinates.x() < config.getSize() &&
+                coordinates.x() < size &&
                 coordinates.y() >= 0 &&
-                coordinates.y() < config.getSize()) {
+                coordinates.y() < size) {
             entity.setCoordinates(coordinates);
             entitiesMap.put(coordinates, entity);
         } else {
@@ -35,9 +35,9 @@ public class WorldMap {
 
     public void removeEntity(Coordinates coordinates) {
         if (    coordinates.x() >= 0 &&
-                coordinates.x() < config.getSize() &&
+                coordinates.x() < size &&
                 coordinates.y() >= 0 &&
-                coordinates.y() < config.getSize()) {
+                coordinates.y() < size) {
             entitiesMap.remove(coordinates);
         } else {
             throw new IllegalArgumentException("Coordinates out of bounds: " + coordinates);
@@ -68,12 +68,9 @@ public class WorldMap {
 
 
     public int getSize() {
-        return config.getSize();
+        return size;
     }
 
-    public void setSize(int size) {
-        config.setSize(size);
-    }
 
     public HashMap<Coordinates, Entity> getEntitiesMap() {
         return entitiesMap;
