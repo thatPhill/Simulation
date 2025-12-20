@@ -8,7 +8,7 @@ import utils.MessagePrinter;
 import java.util.Scanner;
 
 public class Simulation {
-    public static int turnCount = 0;
+    private int turnCount = 0;
     private final WorldMap map;
     private final BreadthFirstSearch bfs;
     private final WorldConfig worldConfig;
@@ -74,10 +74,11 @@ public class Simulation {
     }
 
     private void nextTurn(){
-        render.render(map);
+        render.render(map,this);
         MessagePrinter.printKeyForPause();
         turnAction.execute();
         spawnAction.execute();
+        setTurnCount(getTurnCount() + 1);
     }
 
     public void start() {
@@ -101,5 +102,13 @@ public class Simulation {
                 break;
             }
         }
+    }
+
+    public int getTurnCount() {
+        return turnCount;
+    }
+
+    public void setTurnCount(int turnCount) {
+        this.turnCount = turnCount;
     }
 }

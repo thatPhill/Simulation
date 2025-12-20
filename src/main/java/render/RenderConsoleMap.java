@@ -11,7 +11,7 @@ public class RenderConsoleMap {
     private final String EMPTY = EntityType.EMPTY.getEmoji();
 
 
-    public void render (WorldMap worldMap){
+    public void render (WorldMap worldMap, Simulation simulation) {
         for (int x = 0; x < worldMap.getSize(); x++) {
             for (int y = 0; y < worldMap.getSize(); y++) {
                 Entity entity = worldMap.getEntity(new Coordinates(x, y));
@@ -28,6 +28,6 @@ public class RenderConsoleMap {
             }
             System.out.println();
         }
-        System.out.println("Turn - " + Simulation.turnCount++);
+        System.out.println("Turn - " + simulation.getTurnCount());
     }
 }
