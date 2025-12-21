@@ -12,12 +12,12 @@ import world.Simulation;
 import world.WorldMap;
 
 public class RenderConsoleMap {
-    private final String EMPTY = EntityType.EMPTY.getEmoji();
-    private final String PREDATOR = EntityType.PREDATOR.getEmoji();
-    private final String HERBIVORE = EntityType.HERBIVORE.getEmoji();
-    private final String ROCK = EntityType.ROCK.getEmoji();
-    private final String TREE = EntityType.TREE.getEmoji();
-    private final String GRASS = EntityType.GRASS.getEmoji();
+    private final String empty = EntityType.EMPTY.getEmoji();
+    private final String predator = EntityType.PREDATOR.getEmoji();
+    private final String herbivore = EntityType.HERBIVORE.getEmoji();
+    private final String rock = EntityType.ROCK.getEmoji();
+    private final String tree = EntityType.TREE.getEmoji();
+    private final String grass = EntityType.GRASS.getEmoji();
 
 
     public void render (WorldMap worldMap, Simulation simulation) {
@@ -25,12 +25,12 @@ public class RenderConsoleMap {
             for (int y = 0; y < worldMap.getSize(); y++) {
                 Entity entity = worldMap.getEntity(new Coordinates(x, y));
                 switch (entity) {
-                    case null -> System.out.print(EMPTY + " ");
-                    case Herbivore herbivore -> System.out.print(HERBIVORE + " ");
-                    case Rock rock -> System.out.print(ROCK + " ");
-                    case Tree tree -> System.out.print(TREE + " ");
-                    case Grass grass -> System.out.print(GRASS + " ");
-                    case Predator predator -> System.out.print(PREDATOR + " ");
+                    case null -> System.out.print(empty + " ");
+                    case Herbivore herbivore -> System.out.print(this.herbivore + " ");
+                    case Rock rock -> System.out.print(this.rock + " ");
+                    case Tree tree -> System.out.print(this.tree + " ");
+                    case Grass grass -> System.out.print(this.grass + " ");
+                    case Predator predator -> System.out.print(this.predator + " ");
                     default -> {
                     }
                 }
