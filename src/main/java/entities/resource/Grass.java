@@ -5,8 +5,8 @@ import world.Coordinates;
 
 public class Grass extends Entity {
 
-    public Grass(Coordinates coordinates, String emoji) {
-        super(coordinates, emoji);
+    public Grass(Coordinates coordinates) {
+        super(coordinates);
     }
 
 }

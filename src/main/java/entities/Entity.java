@@ -4,10 +4,8 @@ import world.Coordinates;
 
 public abstract class Entity {
     private Coordinates coordinates;
-    private final String emoji;
 
-    public Entity(Coordinates coordinates, String emoji) {
-        this.emoji = emoji;
+    public Entity(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
 
@@ -19,7 +17,4 @@ public abstract class Entity {
         this.coordinates = coordinates;
     }
 
-    public String getEmoji() {
-        return emoji;
-    }
 }

@@ -14,16 +14,16 @@ public class Herbivore extends Creature {
     private static final int DEFAULT_SPEED = 1;
     private static final int DEFAULT_HEALTH = 10;
 
-    public Herbivore(Coordinates coordinates, String emoji, int speed, int health) {
-        super(coordinates, emoji, speed, health);
+    public Herbivore(Coordinates coordinates, int speed, int health) {
+        super(coordinates, speed, health);
     }
 
-    public Herbivore(Coordinates coordinates, String emoji, int speed) {
-        super(coordinates, emoji, speed, DEFAULT_HEALTH);
+    public Herbivore(Coordinates coordinates, int speed) {
+        super(coordinates, speed, DEFAULT_HEALTH);
     }
 
-    public Herbivore(Coordinates coordinates, String emoji) {
-        super(coordinates, emoji, DEFAULT_SPEED, DEFAULT_HEALTH);
+    public Herbivore(Coordinates coordinates) {
+        super(coordinates,DEFAULT_SPEED, DEFAULT_HEALTH);
     }
 
     @Override

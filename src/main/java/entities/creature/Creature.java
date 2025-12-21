@@ -14,8 +14,8 @@ public abstract class Creature extends Entity {
     private int health;
 
 
-    public Creature(Coordinates coordinates, String emoji, int speed, int health) {
-        super(coordinates, emoji);
+    public Creature(Coordinates coordinates, int speed, int health) {
+        super(coordinates);
         this.speed = speed;
         this.health = health;
     }

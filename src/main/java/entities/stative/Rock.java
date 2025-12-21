@@ -4,7 +4,7 @@ import world.Coordinates;
 
 public class Rock extends Stative{
 
-    public Rock(Coordinates coordinates, String emoji) {
-        super(coordinates, emoji);
+    public Rock(Coordinates coordinates) {
+        super(coordinates);
     }
 }

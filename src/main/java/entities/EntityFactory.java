@@ -11,11 +11,11 @@ public class EntityFactory {
 
     public static Entity createEntity(EntityType type, Coordinates pos) {
         return switch (type) {
-            case HERBIVORE -> new Herbivore(pos, type.getEmoji());
-            case PREDATOR -> new Predator(pos, type.getEmoji());
-            case GRASS -> new Grass(pos, type.getEmoji());
-            case ROCK -> new Rock(pos, type.getEmoji());
-            case TREE -> new Tree(pos, type.getEmoji());
+            case HERBIVORE -> new Herbivore(pos);
+            case PREDATOR -> new Predator(pos);
+            case GRASS -> new Grass(pos);
+            case ROCK -> new Rock(pos);
+            case TREE -> new Tree(pos);
             default -> throw new IllegalStateException("Unexpected value: " + type);
         };
     }

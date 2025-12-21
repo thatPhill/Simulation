@@ -14,13 +14,13 @@ public class Predator extends Creature {
     private static final int DEFAULT_HEALTH = 100;
     private int damage;
 
-    public Predator(Coordinates coordinates, String emoji, int speed, int health, int damage) {
-        super(coordinates, emoji, speed, health);
+    public Predator(Coordinates coordinates, int speed, int health, int damage) {
+        super(coordinates, speed, health);
         this.damage = damage;
     }
 
-    public Predator(Coordinates coordinates, String emoji) {
-        super(coordinates, emoji, DEFAULT_SPEED, DEFAULT_HEALTH);
+    public Predator(Coordinates coordinates) {
+        super(coordinates, DEFAULT_SPEED, DEFAULT_HEALTH);
     }
 
     @Override
