@@ -22,10 +22,7 @@ public class WorldMap {
     private final HashMap<Coordinates, Entity> entitiesMap = new HashMap<>();
 
     public void setEntity(Coordinates coordinates, Entity entity) {
-        if (    coordinates.x() >= 0 &&
-                coordinates.x() < size &&
-                coordinates.y() >= 0 &&
-                coordinates.y() < size) {
+        if (validateCoordinates(coordinates)) {
             entity.setCoordinates(coordinates);
             entitiesMap.put(coordinates, entity);
         } else {
@@ -34,16 +31,19 @@ public class WorldMap {
     }
 
     public void removeEntity(Coordinates coordinates) {
-        if (    coordinates.x() >= 0 &&
-                coordinates.x() < size &&
-                coordinates.y() >= 0 &&
-                coordinates.y() < size) {
+        if (validateCoordinates(coordinates)) {
             entitiesMap.remove(coordinates);
         } else {
             throw new IllegalArgumentException("Coordinates out of bounds: " + coordinates);
         }
     }
 
+    private boolean validateCoordinates(Coordinates coordinates) {
+        return coordinates.x() >= 0 &&
+                coordinates.x() < size &&
+                coordinates.y() >= 0 &&
+                coordinates.y() < size;
+    }
 
 
     public boolean isCellWalkable(int x, int y, Creature mover) {
