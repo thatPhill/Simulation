@@ -46,40 +46,37 @@ public class BreadthFirstSearch implements PathFinder {
 
     @Override
     public List<Coordinates> find(Coordinates start, Coordinates goal) {
-        Queue<Coordinates> queue = new LinkedList<>();
-        Map<Coordinates, Coordinates> parentMap = new HashMap<>();
+        Queue<Node> queue = new LinkedList<>();
         Set<Coordinates> visited = new HashSet<>();
 
+        Node startNode = new Node(start, null);
+        queue.add(startNode);
+        visited.add(start);
 
-           queue.add(start);
-           visited.add(start);
-           parentMap.put(start, null);
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
 
+            if (current.coordinates().equals(goal)) {
+                List<Coordinates> path = new ArrayList<>();
+                Node node = current;
+                while (node != null) {
+                    path.add(node.coordinates());
+                    node = node.parent();
+                }
+                Collections.reverse(path);
+                return path;
+            }
 
-           while (!queue.isEmpty()) {
-               Coordinates current = queue.poll();
-               if (current.equals(goal)) {
-                   List<Coordinates> path = new ArrayList<>();
-                   while (current != null) {
-                       path.add(current);
-                       current = parentMap.get(current);
-                   }
-
-                   Collections.reverse(path);
-                   return path;
-               }
-               List<Coordinates> neighbours = getNeighbours(current, mover);
-
-               for (Coordinates neighbour : neighbours) {
-                   if (!visited.contains(neighbour)) {
-                       queue.add(neighbour);
-                       parentMap.put(neighbour, current);
-                       visited.add(neighbour);
-                   }
-               }
-           }
+            List<Coordinates> neighbours = getNeighbours(current.coordinates(), mover);
+            for (Coordinates neighbour : neighbours) {
+                if (!visited.contains(neighbour)) {
+                    Node neighbourNode = new Node(neighbour, current);
+                    queue.add(neighbourNode);
+                    visited.add(neighbour);
+                }
+            }
+        }
         return Collections.emptyList();
-
     }
 
 
