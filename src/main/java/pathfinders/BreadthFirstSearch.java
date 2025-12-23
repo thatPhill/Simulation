@@ -1,7 +1,9 @@
 package pathfinders;
 
 import entities.Entity;
+import entities.creature.Attackable;
 import entities.creature.Creature;
+import entities.resource.Eatable;
 import world.Coordinates;
 import world.WorldMap;
 
@@ -87,15 +89,17 @@ public class BreadthFirstSearch implements PathFinder {
 
 
     public Coordinates getNextStep(WorldMap worldMap, List<Coordinates> path) {
-        Coordinates next = null;
-        Entity entity = worldMap.getEntity(mover.getCoordinates());
-        if (path.size() <= mover.getSpeed() && mover.isTarget(entity)) {
-            next = path.getLast();
-        } else if (path.size() <= mover.getSpeed() && mover.isTarget(entity)) {
-            next = path.get(path.size() - 2);
+
+        Entity target = worldMap.getEntity(path.getLast());
+
+        if (path.size() <= mover.getSpeed() && target instanceof Eatable) {
+            return path.getLast();
+        }else if (path.size() <= mover.getSpeed() && target instanceof Attackable) {
+            return path.get(path.size() - 2);
         } else if (mover.getSpeed() < path.size()) {
-            next = path.get(mover.getSpeed());
+           return path.get(mover.getSpeed());
         }
-        return next;
+
+        return mover.getCoordinates();
     }
 }

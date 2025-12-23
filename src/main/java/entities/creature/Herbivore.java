@@ -9,7 +9,7 @@ import world.WorldMap;
 
 import java.util.List;
 
-public class Herbivore extends Creature {
+public class Herbivore extends Creature implements Attackable {
 
     private static final int DEFAULT_SPEED = 1;
     private static final int DEFAULT_HEALTH = 10;

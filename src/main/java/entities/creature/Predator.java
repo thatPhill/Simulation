@@ -36,22 +36,14 @@ public class Predator extends Creature {
         }
 
         Coordinates next = pathfinder.getNextStep(worldMap, path);
-        Entity target = worldMap.getEntity(path.getLast());
 
-        if (next == null) {
-            if (target instanceof Herbivore) {
-                System.out.println("hp herbivore before attck - " + ((Herbivore) target).getHealth());
-                System.out.println("Predator on cell" + this.getCoordinates() + "attack herbivore on " + target.getCoordinates() + "hp herbivore after this " + ((Herbivore) target).getHealth());
-                attack(worldMap, path.getLast(), worldConfig, pathfinder);
-            }
-            return;
-        }
+        this.setHealth(this.getHealth() - getSpeed());
 
         if (path.get(path.size() - 2).equals(next)) {
             attack(worldMap, path.getLast(), worldConfig, pathfinder);
         }
 
-        this.setHealth(this.getHealth() - getSpeed());
+
 
         if (this.getHealth() <= 0) {
             worldMap.removeEntity(this.getCoordinates());
