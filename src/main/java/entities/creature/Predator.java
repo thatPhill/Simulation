@@ -12,6 +12,7 @@ public class Predator extends Creature {
 
     private static final int DEFAULT_SPEED = 2;
     private static final int DEFAULT_HEALTH = 100;
+    private static final int DEFAULT_DAMAGE = 10;
     private int damage;
 
     public Predator(Coordinates coordinates, int speed, int health, int damage) {
@@ -21,6 +22,7 @@ public class Predator extends Creature {
 
     public Predator(Coordinates coordinates) {
         super(coordinates, DEFAULT_SPEED, DEFAULT_HEALTH);
+        this.damage = DEFAULT_DAMAGE;
     }
 
     @Override
@@ -62,7 +64,6 @@ public class Predator extends Creature {
         for (Coordinates neighbour : neighbours) {
             Creature target = (Creature) worldMap.getEntity(neighbour);
             if (target instanceof Herbivore) {
-                setDamage(10);
                 target.setHealth(target.getHealth() - getDamage());
                 if (target.getHealth() <= 0){
                     worldConfig.setHerbivores(worldConfig.getHerbivores() - 1);
