@@ -1,13 +1,10 @@
 package entities.creature;
 
 import entities.Entity;
-import entities.resource.Grass;
 import pathfinders.BreadthFirstSearch;
 import world.Coordinates;
 import world.WorldConfig;
 import world.WorldMap;
-
-import java.util.List;
 
 public abstract class Creature extends Entity {
     private int speed;
@@ -22,7 +19,7 @@ public abstract class Creature extends Entity {
 
     public abstract void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap, WorldConfig worldConfig);
 
-    public abstract boolean isTarget(Entity entity);
+    public abstract Class<? extends Entity> getTarget();
 
 
     public int getHealth() {

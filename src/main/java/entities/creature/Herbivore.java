@@ -30,7 +30,7 @@ public class Herbivore extends Creature implements Attackable {
     public void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap, WorldConfig worldConfig) {
         pathfinder.setMover(this);
         Coordinates start = getCoordinates();
-        List<Coordinates> path = pathfinder.find(worldMap, this.getCoordinates(), Grass.class);
+        List<Coordinates> path = pathfinder.find(worldMap, this.getCoordinates(), this.getTarget());
         if (path == null || path.isEmpty()) {
             return;
         }
@@ -59,8 +59,8 @@ public class Herbivore extends Creature implements Attackable {
 
 
     @Override
-    public boolean isTarget(Entity entity) {
-        return entity instanceof Grass;
+    public Class<? extends Entity> getTarget() {
+        return Grass.class;
     }
 
 

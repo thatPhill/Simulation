@@ -29,7 +29,7 @@ public class Predator extends Creature {
     public void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap, WorldConfig worldConfig) {
         pathfinder.setMover(this);
         Coordinates start = getCoordinates();
-        List<Coordinates> path = pathfinder.find(worldMap, this.getCoordinates(), Herbivore.class);
+        List<Coordinates> path = pathfinder.find(worldMap, this.getCoordinates(), getTarget());
 
         if (path == null || path.isEmpty()) {
             return;
@@ -77,8 +77,8 @@ public class Predator extends Creature {
     }
 
     @Override
-    public boolean isTarget(Entity entity) {
-        return entity instanceof Herbivore;
+    public Class<? extends Entity> getTarget() {
+        return Herbivore.class;
     }
 
 
