@@ -33,7 +33,7 @@ public class BreadthFirstSearch implements PathFinder {
         List<Coordinates> neighbours = new ArrayList<>();
         for (Coordinates direction : DIRECTIONS) {
             Coordinates neighbour = coord.sum(direction);
-            if (neighbour.x() >= 0 && neighbour.x() < worldMap.getSize()&&
+            if (neighbour.x() >= 0 && neighbour.x() < worldMap.getSize() &&
                     neighbour.y() >= 0 && neighbour.y() < worldMap.getSize()) {
                 if (worldMap.isCellWalkable(neighbour.x(), neighbour.y(), mover)) {
                     neighbours.add(neighbour);
@@ -45,7 +45,7 @@ public class BreadthFirstSearch implements PathFinder {
     }
 
     @Override
-    public List<Coordinates> find(Coordinates start, Coordinates goal) {
+    public List<Coordinates> find(WorldMap worldMap, Coordinates start, Class<? extends Entity> target) {
         Queue<Node> queue = new LinkedList<>();
         Set<Coordinates> visited = new HashSet<>();
 
@@ -56,7 +56,8 @@ public class BreadthFirstSearch implements PathFinder {
         while (!queue.isEmpty()) {
             Node current = queue.poll();
 
-            if (current.coordinates().equals(goal)) {
+            Entity entity = worldMap.getEntity(current.coordinates());
+            if (target.isInstance(entity)) {
                 List<Coordinates> path = new ArrayList<>();
                 Node node = current;
                 while (node != null) {
@@ -80,8 +81,21 @@ public class BreadthFirstSearch implements PathFinder {
     }
 
 
-
     public void setMover(Creature mover) {
         this.mover = mover;
+    }
+
+
+    public Coordinates getNextStep(WorldMap worldMap, List<Coordinates> path) {
+        Coordinates next = null;
+        Entity entity = worldMap.getEntity(mover.getCoordinates());
+        if (path.size() <= mover.getSpeed() && mover.isTarget(entity)) {
+            next = path.getLast();
+        } else if (path.size() <= mover.getSpeed() && mover.isTarget(entity)) {
+            next = path.get(path.size() - 2);
+        } else if (mover.getSpeed() < path.size()) {
+            next = path.get(mover.getSpeed());
+        }
+        return next;
     }
 }

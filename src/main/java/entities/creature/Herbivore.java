@@ -23,29 +23,29 @@ public class Herbivore extends Creature {
     }
 
     public Herbivore(Coordinates coordinates) {
-        super(coordinates,DEFAULT_SPEED, DEFAULT_HEALTH);
+        super(coordinates, DEFAULT_SPEED, DEFAULT_HEALTH);
     }
 
     @Override
     public void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap, WorldConfig worldConfig) {
+        pathfinder.setMover(this);
         Coordinates start = getCoordinates();
-        Coordinates grass = findNearestTarget(worldMap, pathfinder);
-        List<Coordinates> path = pathfinder.find(start, grass);
-        if (path == null || path.isEmpty()){
+        List<Coordinates> path = pathfinder.find(worldMap, this.getCoordinates(), Grass.class);
+        if (path == null || path.isEmpty()) {
             return;
         }
 
-        Coordinates next = null;
+        Coordinates next = pathfinder.getNextStep(worldMap, path);
+
         this.setHealth(this.getHealth() - 1);
 
-        next = getNextStep(path, worldMap.getEntity(grass));
 
-        if (next.equals(grass)){
+        if (next.equals(path.getLast())) {
             this.setHealth(this.getHealth() + 5);
             worldConfig.setGrass(worldConfig.getGrass() - 1);
         }
 
-        if (this.getHealth() <= 0){
+        if (this.getHealth() <= 0) {
             worldConfig.setHerbivores(worldConfig.getHerbivores() - 1);
             worldMap.removeEntity(this.getCoordinates());
         } else {
@@ -58,7 +58,6 @@ public class Herbivore extends Creature {
     }
 
 
-    //Helper method for findNearestTarget
     @Override
     public boolean isTarget(Entity entity) {
         return entity instanceof Grass;

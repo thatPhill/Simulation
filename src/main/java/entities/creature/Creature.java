@@ -24,35 +24,6 @@ public abstract class Creature extends Entity {
 
     public abstract boolean isTarget(Entity entity);
 
-    public Coordinates findNearestTarget(WorldMap worldMap, BreadthFirstSearch pathfinder) {
-        Coordinates creatureCoordinates = getCoordinates();
-        int minimalSizePath = Integer.MAX_VALUE;
-        Coordinates nearestTargetCoordinates = null;
-        for (Coordinates mapCoordinates : worldMap.getEntitiesMap().keySet()) {
-            if (isTarget(worldMap.getEntitiesMap().get(mapCoordinates))) {
-                pathfinder.setMover(this);
-                int currentSize = pathfinder.find(creatureCoordinates, mapCoordinates).size();
-                if (currentSize < minimalSizePath) {
-                    minimalSizePath = currentSize;
-                    nearestTargetCoordinates = mapCoordinates;
-                }
-            }
-        }
-        return nearestTargetCoordinates;
-    }
-
-     Coordinates getNextStep(List<Coordinates> path, Entity target) {
-        Coordinates next =  null;
-        if (path.size() <= getSpeed() && target instanceof Grass) {
-            next = path.getLast();
-        } else if (path.size() <= getSpeed() && target instanceof Herbivore) {
-            next = path.get(path.size() - 2);
-        }
-        else if (getSpeed() < path.size()) {
-            next = path.get(getSpeed());
-        }
-        return next;
-    }
 
     public int getHealth() {
         return health;

@@ -27,29 +27,40 @@ public class Predator extends Creature {
 
     @Override
     public void makeMove(BreadthFirstSearch pathfinder, WorldMap worldMap, WorldConfig worldConfig) {
+        pathfinder.setMover(this);
         Coordinates start = getCoordinates();
-        Coordinates herbivore = findNearestTarget(worldMap, pathfinder);
-        List<Coordinates> path = pathfinder.find(start, herbivore);
+        List<Coordinates> path = pathfinder.find(worldMap, this.getCoordinates(), Herbivore.class);
 
-        if (path == null || path.isEmpty()){
+        if (path == null || path.isEmpty()) {
             return;
         }
 
-        Coordinates next = null;
+        Coordinates next = pathfinder.getNextStep(worldMap, path);
+        Entity target = worldMap.getEntity(path.getLast());
 
-        next = getNextStep(path, worldMap.getEntity(herbivore));
+        if (next == null) {
+            if (target instanceof Herbivore) {
+                System.out.println("hp herbivore before attck - " + ((Herbivore) target).getHealth());
+                System.out.println("Predator on cell" + this.getCoordinates() + "attack herbivore on " + target.getCoordinates() + "hp herbivore after this " + ((Herbivore) target).getHealth());
+                attack(worldMap, path.getLast(), worldConfig, pathfinder);
+            }
+            return;
+        }
 
-        attack(worldMap, herbivore, worldConfig, pathfinder);
+        if (path.get(path.size() - 2).equals(next)) {
+            attack(worldMap, path.getLast(), worldConfig, pathfinder);
+        }
 
         this.setHealth(this.getHealth() - getSpeed());
 
-        if (this.getHealth() <= 0){
+        if (this.getHealth() <= 0) {
             worldMap.removeEntity(this.getCoordinates());
             worldConfig.setPredators(worldConfig.getPredators() - 1);
             return;
         }
 
         Entity targetCell = worldMap.getEntity(next);
+
         if (!(targetCell instanceof Herbivore)) {
             worldMap.removeEntity(start);
             setCoordinates(next);
@@ -59,21 +70,20 @@ public class Predator extends Creature {
 
     }
 
-    private void attack(WorldMap worldMap, Coordinates herbivore, WorldConfig worldConfig, BreadthFirstSearch bfs) {
+    private void attack(WorldMap worldMap, Coordinates targetCell, WorldConfig worldConfig, BreadthFirstSearch bfs) {
         List<Coordinates> neighbours = bfs.getNeighbours(this.getCoordinates(), this);
         for (Coordinates neighbour : neighbours) {
             Creature target = (Creature) worldMap.getEntity(neighbour);
             if (target instanceof Herbivore) {
                 target.setHealth(target.getHealth() - getDamage());
-                if (target.getHealth() <= 0){
+                if (target.getHealth() <= 0) {
                     worldConfig.setHerbivores(worldConfig.getHerbivores() - 1);
-                    worldMap.removeEntity(herbivore);
+                    worldMap.removeEntity(targetCell);
                 }
             }
         }
     }
 
-    //Helper method for findNearestTarget
     @Override
     public boolean isTarget(Entity entity) {
         return entity instanceof Herbivore;
